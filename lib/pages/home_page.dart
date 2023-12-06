@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:santa_app_2024/constants/text.dart';
 import 'package:santa_app_2024/widgets/header_of_home.dart';
+import 'package:santa_app_2024/widgets/home_items.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -7,68 +9,35 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Padding(
+      body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            buildHeader(context),
-            // ListView(
-            //   children: [
-            //     // Wallpaper section
-            //     Container(
-            //       height: 200,
-            //       child: Image.asset('assets/santa_claus_wallpaper.png'),
-            //     ),
-      
-            //     // Chat section
-            //     ListTile(
-            //       leading: Icon(Icons.chat),
-            //       title: Text('Chat'),
-            //       subtitle: Text('Open chat and talk!'),
-            //       trailing: Icon(Icons.arrow_forward_ios),
-            //       onTap: () {
-            //         // Navigate to the chat screen
-            //       },
-            //     ),
-      
-            //     // Calling section
-            //     ListTile(
-            //       leading: Icon(Icons.phone),
-            //       title: Text('Calling'),
-            //       subtitle: Text('Call Puppet now!'),
-            //       trailing: Icon(Icons.arrow_forward_ios),
-            //       onTap: () {
-            //         // Make a call to Santa's puppet
-            //       },
-            //     ),
-      
-            //     // Video call section
-            //     ListTile(
-            //       leading: Icon(Icons.videocam),
-            //       title: Text('Video Call'),
-            //       subtitle: Text('Make Video Call Camera'),
-            //       trailing: Icon(Icons.arrow_forward_ios),
-            //       onTap: () {
-            //         // Make a video call to Santa's puppet
-            //       },
-            //     ),
-      
-            //     // Puppets section
-            //     ListTile(
-            //       leading: Icon(Icons.group),
-            //       title: Text('Puppets'),
-            //       subtitle: Text('Call and chat Others Puppets'),
-            //       trailing: Icon(Icons.arrow_forward_ios),
-            //       onTap: () {
-            //         // Navigate to the puppets screen
-            //       },
-            //     ),
-            //   ],
-            // ),
+            buildHeader(context, onSettingsClicked: () {
+              print("settings clicked");
+            }, onFavoriteClicked: () {
+              print("favorite clicked");
+            }),
+            Expanded(
+              child: ListView.builder(
+                itemCount: homeItemsData.length,
+                itemBuilder: (context, index) {
+                  return buildHomeItem(
+                    gredientColor: homeItemsData[index].color,
+                    icon: homeItemsData[index].icon,
+                    title: homeItemsData[index].title,
+                    subtitle: homeItemsData[index].subtitle,
+                    onItemClicked: () {
+                      print(index);
+                    },
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 20),
           ],
         ),
       ),
-    ));
+    );
   }
 }
