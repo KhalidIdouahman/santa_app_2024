@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:santa_app_2024/constants/text.dart';
-import 'package:santa_app_2024/pages/wallpapers_page.dart';
-import 'package:santa_app_2024/widgets/header_of_home.dart';
-import 'package:santa_app_2024/widgets/home_items.dart';
-import 'package:santa_app_2024/widgets/side_bar_widget.dart';
+import 'package:santa_app_2024/models/chat_models/user_chat.dart';
+import 'package:santa_app_2024/pages/chat_page.dart';
+import 'package:santa_app_2024/pages/wallpaper_page/wallpapers_page.dart';
+import 'package:santa_app_2024/widgets/home_widgets/header_of_home.dart';
+import 'package:santa_app_2024/widgets/home_widgets/home_items.dart';
+import 'package:santa_app_2024/widgets/home_widgets/side_bar_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+  static const userChat = UserChat(userName: "Santa", imgUrl: "assets/images/santa_calling_2.jpg" , userStatus: "Online");
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +66,8 @@ void selectedItem(BuildContext myContext, int index) {
       Navigator.push(myContext,
           MaterialPageRoute(builder: (myContext) => const WallpaperPage()));
       break;
-    case 2:
-      // Navigator.pushReplacement(myContext, MaterialPageRoute(builder: (myContext) => const HomePage()));
+    case 1:
+      Navigator.push(myContext, MaterialPageRoute(builder: (myContext) => const ChatPage(user: HomeScreen.userChat,)));
       // print("sidebar item $index clicked.");
       break;
     // case -1:

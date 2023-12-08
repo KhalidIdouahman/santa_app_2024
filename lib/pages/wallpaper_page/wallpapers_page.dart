@@ -1,6 +1,6 @@
 import 'package:dismissible_page/dismissible_page.dart';
 import 'package:flutter/material.dart';
-import 'package:santa_app_2024/pages/image_page.dart';
+import 'package:santa_app_2024/pages/wallpaper_page/image_page.dart';
 // import 'package:santa_app_2024/constants/text.dart';
 
 class WallpaperPage extends StatefulWidget {
