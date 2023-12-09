@@ -3,6 +3,7 @@ import 'package:santa_app_2024/constants/text.dart';
 import 'package:santa_app_2024/models/chat_models/user_chat.dart';
 import 'package:santa_app_2024/pages/calling_page/making_call_page.dart';
 import 'package:santa_app_2024/pages/chat_page.dart';
+import 'package:santa_app_2024/pages/other_characters_page.dart';
 import 'package:santa_app_2024/pages/wallpaper_page/wallpapers_page.dart';
 import 'package:santa_app_2024/widgets/home_widgets/header_of_home.dart';
 import 'package:santa_app_2024/widgets/home_widgets/home_items.dart';
@@ -58,30 +59,74 @@ class HomeScreen extends StatelessWidget {
 
 void selectedItem(BuildContext myContext, int index) {
   switch (index) {
-    // case 0:
-    //   // Navigator.pushReplacement(myContext,
-    //   //     MaterialPageRoute(builder: (myContext) => const HomeScreen()));
-    //   // print("sidebar item $index clicked.");
-    //   break;
     case 0:
       Navigator.push(myContext,
           MaterialPageRoute(builder: (myContext) => const WallpaperPage()));
       break;
     case 1:
       Navigator.push(
-          myContext,
-          MaterialPageRoute(
-              builder: (myContext) => ChatPage(
-                    user: HomeScreen.userChat,
-                  )));
+        myContext,
+        MaterialPageRoute(
+          builder: (myContext) => ChatPage(user: HomeScreen.userChat),
+        ),
+      );
       break;
     case 2:
       Navigator.push(
-          myContext,
-          MaterialPageRoute(
-              builder: (myContext) => MakeCallPage(
-                    user: HomeScreen.userChat,
-                  )));
+        myContext,
+        MaterialPageRoute(
+          builder: (myContext) => MakeCallPage(user: HomeScreen.userChat),
+        ),
+      );
+      break;
+    case 3:
+    // it needs to create video page .
+      Navigator.push(
+        myContext,
+        MaterialPageRoute(
+          builder: (myContext) => MakeCallPage(user: HomeScreen.userChat),
+        ),
+      );
+      break;
+    case 4:
+      Navigator.push(
+        myContext,
+        MaterialPageRoute(
+          builder: (myContext) => const OtherCharactersPage(),
+        ),
+      );
+      break;
+    case 5:
+      Navigator.push(
+        myContext,
+        MaterialPageRoute(
+          builder: (myContext) => MakeCallPage(user: HomeScreen.userChat),
+        ),
+      );
+      break;
+    case 6:
+      Navigator.push(
+        myContext,
+        MaterialPageRoute(
+          builder: (myContext) => MakeCallPage(user: HomeScreen.userChat),
+        ),
+      );
+      break;
+    case 7:
+      Navigator.push(
+        myContext,
+        MaterialPageRoute(
+          builder: (myContext) => MakeCallPage(user: HomeScreen.userChat),
+        ),
+      );
+      break;
+    case 8:
+      Navigator.push(
+        myContext,
+        MaterialPageRoute(
+          builder: (myContext) => MakeCallPage(user: HomeScreen.userChat),
+        ),
+      );
       break;
     // case -1:
     //   // this to exit the app

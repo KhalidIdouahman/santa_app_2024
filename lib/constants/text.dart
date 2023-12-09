@@ -124,7 +124,9 @@ final List<ChatText> chatTextData = [
 
 final List<UserChat> usersList = [
   const UserChat(userName: "Santa", imgUrl: "assets/images/santa_calling_2.jpg", userStatus: "Online" , phoneNum: "+1323486543",),
-  const UserChat(userName: "Santa", imgUrl: "assets/images/santa_calling_2.jpg", userStatus: "Online" , phoneNum: "+1323486543",),
-  const UserChat(userName: "Santa", imgUrl: "assets/images/santa_calling_2.jpg", userStatus: "Online" , phoneNum: "+1323486543",),
-  const UserChat(userName: "Santa", imgUrl: "assets/images/santa_calling_2.jpg", userStatus: "Online" , phoneNum: "+1323486543",),
+  const UserChat(userName: "Jeffy", imgUrl: "assets/images/santa_calling_2.jpg", userStatus: "Online" , phoneNum: "+1579330723",),
+  const UserChat(userName: "Bowser Junior", imgUrl: "assets/images/santa_calling_2.jpg", userStatus: "Online" , phoneNum: "+1857947301",),
+  const UserChat(userName: "Cody", imgUrl: "assets/images/santa_calling_2.jpg", userStatus: "Online" , phoneNum: "+1097493721",),
+  const UserChat(userName: "Rosalina", imgUrl: "assets/images/santa_calling_2.jpg", userStatus: "Online" , phoneNum: "+1344432940",),
+  const UserChat(userName: "Nancy", imgUrl: "assets/images/santa_calling_2.jpg", userStatus: "Online" , phoneNum: "+1468397973",),
 ];
