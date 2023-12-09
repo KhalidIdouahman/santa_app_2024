@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:santa_app_2024/constants/colors.dart';
 import 'package:santa_app_2024/models/chat_models/text_chat.dart';
+import 'package:santa_app_2024/models/chat_models/user_chat.dart';
 import 'package:santa_app_2024/models/home_item_data.dart';
 
 final List<HomeItemsData> homeItemsData = [
@@ -98,13 +99,32 @@ final List<SideBarData> sideBarData = [
 
 final List<ChatText> chatTextData = [
   const ChatText(chatQuestion: "Hi..!🤗", chatResponse: "Hello! Buenos dias☺"),
-  const ChatText(chatQuestion: "How are you ?🤗", chatResponse: "I'm Good thank you."),
-  const ChatText(chatQuestion: "What's your name ?🤗", chatResponse: "I am Santa"),
-  const ChatText(chatQuestion: "How old are you ?🤗", chatResponse: "I am 70 years old"),
+  const ChatText(
+      chatQuestion: "How are you ?🤗", chatResponse: "I'm Good thank you."),
+  const ChatText(
+      chatQuestion: "What's your name ?🤗", chatResponse: "I am Santa"),
+  const ChatText(
+      chatQuestion: "How old are you ?🤗", chatResponse: "I am 70 years old"),
   const ChatText(chatQuestion: "Nice to meet you 🤗", chatResponse: "mee to "),
-  const ChatText(chatQuestion: "What are you doing now ?🤗", chatResponse: "I am playing games , and making videos on youtube."),
-  const ChatText(chatQuestion: "What kind of food you like ?", chatResponse: "I love healthy Food and exercise every day"),
+  const ChatText(
+      chatQuestion: "What are you doing now ?🤗",
+      chatResponse: "I am playing games , and making videos on youtube."),
+  const ChatText(
+      chatQuestion: "What kind of food you like ?",
+      chatResponse: "I love healthy Food and exercise every day"),
   const ChatText(chatQuestion: "Tell me a thing ?", chatResponse: "I love you"),
-  const ChatText(chatQuestion: "I love you so much", chatResponse: "ohhh, thank you , me to , I love you all my fans"),
-  const ChatText(chatQuestion: "Do you like this application ?", chatResponse: "Yes , I love it . And you ? If you love to you should give it a 5 stars , and a great comment , and share it with your friends and family , Goodbye"),
+  const ChatText(
+      chatQuestion: "I love you so much",
+      chatResponse: "ohhh, thank you , me to , I love you all my fans"),
+  const ChatText(
+      chatQuestion: "Do you like this application ?",
+      chatResponse:
+          "Yes , I love it . And you ? If you love to you should give it a 5 stars , and a great comment , and share it with your friends and family , Goodbye"),
+];
+
+final List<UserChat> usersList = [
+  const UserChat(userName: "Santa", imgUrl: "assets/images/santa_calling_2.jpg", userStatus: "Online" , phoneNum: "+1323486543",),
+  const UserChat(userName: "Santa", imgUrl: "assets/images/santa_calling_2.jpg", userStatus: "Online" , phoneNum: "+1323486543",),
+  const UserChat(userName: "Santa", imgUrl: "assets/images/santa_calling_2.jpg", userStatus: "Online" , phoneNum: "+1323486543",),
+  const UserChat(userName: "Santa", imgUrl: "assets/images/santa_calling_2.jpg", userStatus: "Online" , phoneNum: "+1323486543",),
 ];

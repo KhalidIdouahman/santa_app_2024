@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:santa_app_2024/constants/text.dart';
 import 'package:santa_app_2024/models/chat_models/user_chat.dart';
+import 'package:santa_app_2024/pages/calling_page/making_call_page.dart';
 import 'package:santa_app_2024/pages/chat_page.dart';
 import 'package:santa_app_2024/pages/wallpaper_page/wallpapers_page.dart';
 import 'package:santa_app_2024/widgets/home_widgets/header_of_home.dart';
@@ -9,7 +10,7 @@ import 'package:santa_app_2024/widgets/home_widgets/side_bar_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-  static const userChat = UserChat(userName: "Santa", imgUrl: "assets/images/santa_calling_2.jpg" , userStatus: "Online");
+  static final UserChat userChat = usersList.first;
 
   @override
   Widget build(BuildContext context) {
@@ -67,8 +68,20 @@ void selectedItem(BuildContext myContext, int index) {
           MaterialPageRoute(builder: (myContext) => const WallpaperPage()));
       break;
     case 1:
-      Navigator.push(myContext, MaterialPageRoute(builder: (myContext) => const ChatPage(user: HomeScreen.userChat,)));
-      // print("sidebar item $index clicked.");
+      Navigator.push(
+          myContext,
+          MaterialPageRoute(
+              builder: (myContext) => ChatPage(
+                    user: HomeScreen.userChat,
+                  )));
+      break;
+    case 2:
+      Navigator.push(
+          myContext,
+          MaterialPageRoute(
+              builder: (myContext) => MakeCallPage(
+                    user: HomeScreen.userChat,
+                  )));
       break;
     // case -1:
     //   // this to exit the app
