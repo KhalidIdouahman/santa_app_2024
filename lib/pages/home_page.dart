@@ -3,6 +3,7 @@ import 'package:santa_app_2024/constants/text.dart';
 import 'package:santa_app_2024/models/chat_models/user_chat.dart';
 import 'package:santa_app_2024/pages/calling_page/making_call_page.dart';
 import 'package:santa_app_2024/pages/chat_page.dart';
+import 'package:santa_app_2024/pages/counter_call_page.dart';
 import 'package:santa_app_2024/pages/other_characters_page.dart';
 import 'package:santa_app_2024/pages/wallpaper_page/wallpapers_page.dart';
 import 'package:santa_app_2024/widgets/home_widgets/header_of_home.dart';
@@ -100,7 +101,7 @@ void selectedItem(BuildContext myContext, int index) {
       Navigator.push(
         myContext,
         MaterialPageRoute(
-          builder: (myContext) => MakeCallPage(user: HomeScreen.userChat),
+          builder: (myContext) => const CounterCallPage(),
         ),
       );
       break;
