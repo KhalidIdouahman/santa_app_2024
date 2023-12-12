@@ -39,6 +39,9 @@ dependencies:
   # to dismise the clicked image with a nice effect 
   dismissible_page: ^1.0.2
 
+  # to do the header animation , but i didn't work with it .
+  # sliver_tools: ^0.2.12
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
