@@ -195,3 +195,20 @@ final List<ScheduleCallObj> scheduleCalls = [
     sufixIcon: Icons.call,
   ),
 ];
+
+final List<String> imagesList = [
+    "assets/images/santa_calling.jpg",
+    "assets/images/santa_calling_2.jpg",
+    "assets/images/santa_calling.jpg",
+    "assets/images/santa_calling_2.jpg",
+    "assets/images/santa_calling.jpg",
+    "assets/images/santa_calling_2.jpg",
+    "assets/images/santa_calling.jpg",
+    "assets/images/santa_calling_2.jpg",
+    "assets/images/santa_calling.jpg",
+    "assets/images/santa_calling_2.jpg",
+    "assets/images/santa_calling.jpg",
+    "assets/images/santa_calling_2.jpg",
+    "assets/images/santa_calling.jpg",
+    "assets/images/santa_calling_2.jpg",
+];
