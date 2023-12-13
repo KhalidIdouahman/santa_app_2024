@@ -4,9 +4,25 @@ import 'package:santa_app_2024/models/chat_models/user_chat.dart';
 import 'package:santa_app_2024/pages/calling_page/call_page.dart';
 import 'package:santa_app_2024/widgets/calling_widgets/calling_btn.dart';
 
-class MakeCallPage extends StatelessWidget {
+import 'package:santa_app_2024/functionalities/audio_playing.dart';
+
+class MakeCallPage extends StatefulWidget {
   final UserChat user;
   const MakeCallPage({super.key, required this.user});
+
+  @override
+  State<MakeCallPage> createState() => _MakeCallPageState();
+}
+
+class _MakeCallPageState extends State<MakeCallPage> {
+  final makingSound = SoundPlayer();
+  final String ringtonePath = "sounds/iphone_6_original_ringtone.mp3";
+
+  @override
+  void initState() {
+    makingSound.playSound(ringtonePath);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +32,7 @@ class MakeCallPage extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            user.imgUrl,
+            widget.user.imgUrl,
             fit: BoxFit.cover,
           ),
           // Apply blur effect using BackdropFilter
@@ -34,12 +50,12 @@ class MakeCallPage extends StatelessWidget {
               Column(
                 children: [
                   CircleAvatar(
-                    backgroundImage: AssetImage(user.imgUrl),
+                    backgroundImage: AssetImage(widget.user.imgUrl),
                     radius: 50,
                   ),
                   const SizedBox(height: 15),
                   Text(
-                    user.userName,
+                    widget.user.userName,
                     style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -47,7 +63,7 @@ class MakeCallPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 15),
                   Text(
-                    user.phoneNum!,
+                    widget.user.phoneNum!,
                     style: const TextStyle(color: Colors.white, fontSize: 16),
                   )
                 ],
@@ -73,6 +89,7 @@ class MakeCallPage extends StatelessWidget {
                     bgColor: Colors.white,
                     iconColor: Colors.red,
                     onTapped: () {
+                      makingSound.stopSound();
                       Navigator.pop(context);
                     },
                   ),
@@ -83,8 +100,9 @@ class MakeCallPage extends StatelessWidget {
                     bgColor: Colors.white,
                     iconColor: Colors.green,
                     onTapped: () {
+                      makingSound.stopSound();
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => CallPage(user: user)));
+                          builder: (context) => CallPage(user: widget.user)));
                     },
                   ),
                 ],
