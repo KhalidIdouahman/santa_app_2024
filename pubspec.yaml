@@ -38,6 +38,16 @@ dependencies:
   
   # to dismise the clicked image with a nice effect 
   dismissible_page: ^1.0.2
+  # to send requests online
+  http: ^1.1.2
+  # to work with paths of the phone
+  path: ^1.8.3
+  # to access the storage of the phone
+  path_provider: ^2.1.1
+  # to handle the permissions
+  permission_handler: ^11.1.0
+  # to download and save the image to phone
+  image_gallery_saver: ^2.0.3
 
   # to do the header animation , but i didn't work with it .
   # sliver_tools: ^0.2.12
