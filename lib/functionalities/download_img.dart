@@ -59,3 +59,23 @@ void saveImage(String url) async {
   print('Image downloaded!');
   // }
 }
+
+// i get it from a video , it needs the dio package , and a try to see if the permissions are hundled .
+// _save(String imgUrl) async {
+//   await _askPermission();
+//   var response = await Dio()
+//       .get(imgUrl, options: Options(responseType: ResponseType.bytes));
+//   final result =
+//       await ImageGallerySaver.saveImage(Uint8List.fromList(response));
+//   print(result);
+// }
+
+// _askPermission() async {
+//   if (Platform.isIOS) {
+//     Map<PermissionGroup, PermissionStatus> permissions =
+//         await PermissionHandler().requestPermissions([PermissionGroup.photos]);
+//   } else {
+//     PermissionStatus permission = await PermissionHandler()
+//         .checkPermissionStatus(PermissionGroup.storage);
+//   }
+// }

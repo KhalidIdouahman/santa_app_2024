@@ -13,7 +13,8 @@ Widget buildImage({
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(imageUrl),
+            // image: AssetImage(imageUrl),
+            image: NetworkImage(imageUrl),
             fit: BoxFit.cover,
           ),
         ),

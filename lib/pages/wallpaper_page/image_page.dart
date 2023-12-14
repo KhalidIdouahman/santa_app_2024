@@ -1,7 +1,7 @@
 import 'package:dismissible_page/dismissible_page.dart';
 import 'package:flutter/material.dart';
-import 'package:santa_app_2024/constants/text.dart';
 import 'package:santa_app_2024/functionalities/download_img.dart';
+import 'package:santa_app_2024/models/api_wallpaper_model.dart';
 import 'package:santa_app_2024/widgets/wallpaper_widgets/build_img.dart';
 import 'package:santa_app_2024/widgets/wallpaper_widgets/build_img_btn.dart';
 
@@ -10,9 +10,10 @@ typedef CallbackAction = void Function();
 class ImagePage extends StatefulWidget {
   // this index of the clicked img in the wallpaper .
   final int imgIndex;
-  final String imgUrl;
+  // final String imgUrl;
+  final List<ApiWallpaperModel> imgsList;
 
-  ImagePage({super.key, required this.imgIndex, required this.imgUrl});
+  ImagePage({super.key, required this.imgIndex, required this.imgsList});
 
   @override
   State<ImagePage> createState() => _ImagePageState();
@@ -22,8 +23,9 @@ class _ImagePageState extends State<ImagePage> {
   late PageController _pageController;
   late int _currentIndex;
 
-  String url =
-      "http:\/\/twicev.com\/wallpaper2\/\/images\/wallpapers\/V1650903840.jpeg";
+// this was to try downloading the image from the server.
+  // String url =
+  //     "http:\/\/twicev.com\/wallpaper2\/\/images\/wallpapers\/V1650903840.jpeg";
 
   @override
   void initState() {
@@ -56,16 +58,17 @@ class _ImagePageState extends State<ImagePage> {
           children: [
             PageView.builder(
                 controller: _pageController,
-                itemCount: imagesList.length,
+                itemCount: widget.imgsList.length,
                 itemBuilder: (context, index) {
+                  var wallpaperUrl = widget.imgsList[index].wallpaperUrlImg;
                   return buildImage(
                     imageIndex: index,
                     // it is necessare to get the imgUrl from the list to display the image in the right index .
-                    imageUrl: imagesList[index],
+                    imageUrl: wallpaperUrl,
                     shareBtn: buildImageBtn(Icons.save_alt_rounded, () {
                       // downloadImgWithPerimssion(url);
                       // _saveImg(url, true);
-                      saveImage(url);
+                      saveImage(wallpaperUrl);
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content:
                               Text("The image was downloaded successfully.")));
