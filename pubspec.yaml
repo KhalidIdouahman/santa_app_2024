@@ -50,6 +50,8 @@ dependencies:
   image_gallery_saver: ^2.0.3
   # to play audios
   audioplayers: ^5.2.1
+  # to avoid reloading the images each time the user scrolls.
+  cached_network_image: ^3.3.0
 
   # to do the header animation , but i didn't work with it .
   # sliver_tools: ^0.2.12

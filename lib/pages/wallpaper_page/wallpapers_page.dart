@@ -5,6 +5,8 @@ import 'package:santa_app_2024/pages/wallpaper_page/image_page.dart';
 import 'package:santa_app_2024/functionalities/fetching_imgs.dart';
 import 'package:santa_app_2024/models/api_wallpaper_model.dart';
 
+import 'package:cached_network_image/cached_network_image.dart';
+
 class WallpaperPage extends StatefulWidget {
   const WallpaperPage({super.key});
 
@@ -82,8 +84,8 @@ class _WallpaperPageState extends State<WallpaperPage> {
                           borderRadius: BorderRadius.circular(10),
                           child: Hero(
                             tag: i,
-                            child: Image.network(
-                              wallpapers[i].wallpaperUrlImg,
+                            child: CachedNetworkImage(
+                              imageUrl: wallpapers[i].wallpaperUrlImg,
                               fit: BoxFit.cover,
                             ),
                           ),
