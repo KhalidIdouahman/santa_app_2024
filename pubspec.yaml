@@ -52,6 +52,10 @@ dependencies:
   audioplayers: ^5.2.1
   # to avoid reloading the images each time the user scrolls.
   cached_network_image: ^3.3.0
+  # to play videos
+  video_player: ^2.8.1
+  # to access the camera
+  camera: ^0.10.5+7
 
   # to do the header animation , but i didn't work with it .
   # sliver_tools: ^0.2.12

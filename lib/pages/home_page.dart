@@ -10,10 +10,14 @@ import 'package:santa_app_2024/widgets/home_widgets/header_of_home.dart';
 import 'package:santa_app_2024/widgets/home_widgets/home_items.dart';
 import 'package:santa_app_2024/widgets/home_widgets/side_bar_widget.dart';
 
+import 'package:camera/camera.dart';
+import 'package:santa_app_2024/pages/video_call_page/making_video_call_page.dart';
+
 typedef CallbackAction = void Function();
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final List<CameraDescription> camerasDesList;
+  const HomeScreen({super.key , required this.camerasDesList});
   static final UserChat userChat = usersList.first;
 
   @override
@@ -33,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                 // this the height before scrolling .
                 expandedHeight: MediaQuery.of(context).size.height * 0.35,
                 // Keep the header visible when scrolling
-                pinned: true, 
+                pinned: true,
                 // this is the height in which the header stops scrolling
                 toolbarHeight: MediaQuery.of(context).size.height * 0.18,
                 // to avoid the shadow below the header
@@ -44,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                 automaticallyImplyLeading: false,
                 // here when i show the header and he makes it animate when scrolling.
                 flexibleSpace: FlexibleSpaceBar(
-                  // i give it to the title because it animate by its self 
+                  // i give it to the title because it animate by its self
                   title: buildHeader(
                     context: context,
                     onSettingsClicked: () {
@@ -70,8 +74,6 @@ class HomeScreen extends StatelessWidget {
                     subtitle: homeItemsData[index].subtitle,
                     onItemClicked: () {
                       selectedItem(context, index);
-                      // just for debug
-                      print(index);
                     },
                   ),
                   childCount: homeItemsData.length,
@@ -83,7 +85,6 @@ class HomeScreen extends StatelessWidget {
       }),
     );
   }
-}
 
 
 
@@ -110,11 +111,10 @@ void selectedItem(BuildContext myContext, int index) {
       );
       break;
     case 3:
-      // it needs to create video page .
       Navigator.push(
         myContext,
         MaterialPageRoute(
-          builder: (myContext) => MakeCallPage(user: HomeScreen.userChat),
+          builder: (myContext) => MakeVideoCallPage(user: HomeScreen.userChat , cameras: camerasDesList),
         ),
       );
       break;
@@ -163,4 +163,6 @@ void selectedItem(BuildContext myContext, int index) {
     //   SystemNavigator.pop();
     //   break;
   }
+}
+
 }

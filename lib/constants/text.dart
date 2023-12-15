@@ -28,7 +28,7 @@ final List<HomeItemsData> homeItemsData = [
       color: gredientColor4),
   HomeItemsData(
       icon: Icons.group,
-      title: "Puppets",
+      title: "Other Characters",
       subtitle: "Call and chat Other Puppets",
       color: gredientColor5),
   HomeItemsData(

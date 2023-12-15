@@ -2,8 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to camera to make the video call</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need access to microphone to make the video call</string>
+
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>We need access to photos library so that we can save the downloaded image you want</string>
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
