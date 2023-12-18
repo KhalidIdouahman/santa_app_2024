@@ -12,6 +12,7 @@ import 'package:santa_app_2024/widgets/home_widgets/side_bar_widget.dart';
 
 import 'package:camera/camera.dart';
 import 'package:santa_app_2024/pages/video_call_page/making_video_call_page.dart';
+import 'package:santa_app_2024/functionalities/share.dart';
 
 typedef CallbackAction = void Function();
 
@@ -135,11 +136,10 @@ void selectedItem(BuildContext myContext, int index) {
       );
       break;
     case 6:
-      Navigator.push(
-        myContext,
-        MaterialPageRoute(
-          builder: (myContext) => MakeCallPage(user: HomeScreen.userChat),
-        ),
+      shareData(
+        message:
+            "Take a look to this beautiful app , I am sure you will like it. 😍❤",
+        url: appUrl,
       );
       break;
     case 7:
@@ -158,10 +158,6 @@ void selectedItem(BuildContext myContext, int index) {
         ),
       );
       break;
-    // case -1:
-    //   // this to exit the app
-    //   SystemNavigator.pop();
-    //   break;
   }
 }
 

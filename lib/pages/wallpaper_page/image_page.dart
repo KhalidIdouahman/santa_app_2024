@@ -5,6 +5,9 @@ import 'package:santa_app_2024/models/api_wallpaper_model.dart';
 import 'package:santa_app_2024/widgets/wallpaper_widgets/build_img.dart';
 import 'package:santa_app_2024/widgets/wallpaper_widgets/build_img_btn.dart';
 
+import 'package:santa_app_2024/constants/text.dart';
+import 'package:santa_app_2024/functionalities/share.dart';
+
 typedef CallbackAction = void Function();
 
 class ImagePage extends StatefulWidget {
@@ -75,6 +78,11 @@ class _ImagePageState extends State<ImagePage> {
                       print("downloaded");
                     }),
                     downloadBtn: buildImageBtn(Icons.share, () {
+                      shareData(
+                        message:
+                            "Take a look to this beautiful app , I am sure you will like it. 😍❤",
+                        url: appUrl,
+                      );
                       print("shared");
                     }),
                   );

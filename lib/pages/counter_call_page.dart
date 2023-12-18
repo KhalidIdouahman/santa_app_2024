@@ -4,6 +4,7 @@ import 'package:santa_app_2024/constants/text.dart';
 import 'package:santa_app_2024/pages/calling_page/making_call_page.dart';
 import 'package:santa_app_2024/widgets/counter_call_widgets/counter_call_item.dart';
 
+import 'package:santa_app_2024/functionalities/notifications_handler.dart';
 
 class CounterCallPage extends StatefulWidget {
   const CounterCallPage({super.key});
@@ -14,8 +15,20 @@ class CounterCallPage extends StatefulWidget {
 
 class _CounterCallPageState extends State<CounterCallPage> {
 
+// the instance of the notification handler to work with.
+  final NotificationHandler _notificationHandler = NotificationHandler();
+
   // in this map i store in it the index of the clicked schedule call , and the and the duration that changes each second.
   final Map<int, int> storeCounterDownTimers = {};
+
+
+  @override
+  void initState() {
+    super.initState();
+    // initialize the notifications
+    WidgetsFlutterBinding.ensureInitialized();
+    _notificationHandler.initNotifications();
+  }
 
 // in this func i take the index of the clicked item to get from it the duration , and starts the timer.
   void startCounter(int callIndex) {
@@ -37,6 +50,14 @@ class _CounterCallPageState extends State<CounterCallPage> {
         });
       } else {
         timer.cancel();
+        // when the timer is finished then the notification is pushed.
+        _notificationHandler.pushNotification(
+          id: 0,
+          title: "Santa is Calling",
+          descreption: "Hey i'm santa , i want to talk with you good boy.",
+          pyload: "call me",
+        );
+        // pushing to the call page.
         Navigator.push(
           context,
           MaterialPageRoute(

@@ -197,18 +197,21 @@ final List<ScheduleCallObj> scheduleCalls = [
 ];
 
 final List<String> imagesList = [
-    "assets/images/santa_calling.jpg",
-    "assets/images/santa_calling_2.jpg",
-    "assets/images/santa_calling.jpg",
-    "assets/images/santa_calling_2.jpg",
-    "assets/images/santa_calling.jpg",
-    "assets/images/santa_calling_2.jpg",
-    "assets/images/santa_calling.jpg",
-    "assets/images/santa_calling_2.jpg",
-    "assets/images/santa_calling.jpg",
-    "assets/images/santa_calling_2.jpg",
-    "assets/images/santa_calling.jpg",
-    "assets/images/santa_calling_2.jpg",
-    "assets/images/santa_calling.jpg",
-    "assets/images/santa_calling_2.jpg",
+  "assets/images/santa_calling.jpg",
+  "assets/images/santa_calling_2.jpg",
+  "assets/images/santa_calling.jpg",
+  "assets/images/santa_calling_2.jpg",
+  "assets/images/santa_calling.jpg",
+  "assets/images/santa_calling_2.jpg",
+  "assets/images/santa_calling.jpg",
+  "assets/images/santa_calling_2.jpg",
+  "assets/images/santa_calling.jpg",
+  "assets/images/santa_calling_2.jpg",
+  "assets/images/santa_calling.jpg",
+  "assets/images/santa_calling_2.jpg",
+  "assets/images/santa_calling.jpg",
+  "assets/images/santa_calling_2.jpg",
 ];
+
+// the app url to be used in sharing images and the app.
+const String appUrl = "https://this_is_the_link_of_the_app.com";
