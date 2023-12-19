@@ -13,12 +13,15 @@ import 'package:santa_app_2024/widgets/home_widgets/side_bar_widget.dart';
 import 'package:camera/camera.dart';
 import 'package:santa_app_2024/pages/video_call_page/making_video_call_page.dart';
 import 'package:santa_app_2024/functionalities/share.dart';
+import 'package:in_app_review/in_app_review.dart';
+import 'package:launch_review/launch_review.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 typedef CallbackAction = void Function();
 
 class HomeScreen extends StatelessWidget {
   final List<CameraDescription> camerasDesList;
-  const HomeScreen({super.key , required this.camerasDesList});
+  const HomeScreen({super.key, required this.camerasDesList});
   static final UserChat userChat = usersList.first;
 
   @override
@@ -87,78 +90,94 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-
-
-void selectedItem(BuildContext myContext, int index) {
-  switch (index) {
-    case 0:
-      Navigator.push(myContext,
-          MaterialPageRoute(builder: (myContext) => const WallpaperPage()));
-      break;
-    case 1:
-      Navigator.push(
-        myContext,
-        MaterialPageRoute(
-          builder: (myContext) => ChatPage(user: HomeScreen.userChat),
-        ),
-      );
-      break;
-    case 2:
-      Navigator.push(
-        myContext,
-        MaterialPageRoute(
-          builder: (myContext) => MakeCallPage(user: HomeScreen.userChat),
-        ),
-      );
-      break;
-    case 3:
-      Navigator.push(
-        myContext,
-        MaterialPageRoute(
-          builder: (myContext) => MakeVideoCallPage(user: HomeScreen.userChat , cameras: camerasDesList),
-        ),
-      );
-      break;
-    case 4:
-      Navigator.push(
-        myContext,
-        MaterialPageRoute(
-          builder: (myContext) => const OtherCharactersPage(),
-        ),
-      );
-      break;
-    case 5:
-      Navigator.push(
-        myContext,
-        MaterialPageRoute(
-          builder: (myContext) => const CounterCallPage(),
-        ),
-      );
-      break;
-    case 6:
-      shareData(
-        message:
-            "Take a look to this beautiful app , I am sure you will like it. 😍❤",
-        url: appUrl,
-      );
-      break;
-    case 7:
-      Navigator.push(
-        myContext,
-        MaterialPageRoute(
-          builder: (myContext) => MakeCallPage(user: HomeScreen.userChat),
-        ),
-      );
-      break;
-    case 8:
-      Navigator.push(
-        myContext,
-        MaterialPageRoute(
-          builder: (myContext) => MakeCallPage(user: HomeScreen.userChat),
-        ),
-      );
-      break;
+  void selectedItem(BuildContext myContext, int index) {
+    switch (index) {
+      case 0:
+        Navigator.push(myContext,
+            MaterialPageRoute(builder: (myContext) => const WallpaperPage()));
+        break;
+      case 1:
+        Navigator.push(
+          myContext,
+          MaterialPageRoute(
+            builder: (myContext) => ChatPage(user: HomeScreen.userChat),
+          ),
+        );
+        break;
+      case 2:
+        Navigator.push(
+          myContext,
+          MaterialPageRoute(
+            builder: (myContext) => MakeCallPage(user: HomeScreen.userChat),
+          ),
+        );
+        break;
+      case 3:
+        Navigator.push(
+          myContext,
+          MaterialPageRoute(
+            builder: (myContext) => MakeVideoCallPage(
+                user: HomeScreen.userChat, cameras: camerasDesList),
+          ),
+        );
+        break;
+      case 4:
+        Navigator.push(
+          myContext,
+          MaterialPageRoute(
+            builder: (myContext) => const OtherCharactersPage(),
+          ),
+        );
+        break;
+      case 5:
+        Navigator.push(
+          myContext,
+          MaterialPageRoute(
+            builder: (myContext) => const CounterCallPage(),
+          ),
+        );
+        break;
+      case 6:
+        shareData(
+          message:
+              "Take a look to this beautiful app , I am sure you will like it. 😍❤",
+          url: appUrl,
+        );
+        break;
+      case 7:
+        // this for rating the app in the app itself , but it works only when the app is in the store,
+        // because it get the app id directly from the build.gradle , "com.example.santa-2024".
+        // sendReview();
+        // and this pushes the user to give a rate in playstore , and if we don't specified any parameter to launch
+        // method it will get the app id and redirect it to the app in the store .
+        LaunchReview.launch(androidAppId: "jp.konami.pesam");
+        break;
+      case 8:
+        goToUrl();
+        // Navigator.push(
+        //   myContext,
+        //   MaterialPageRoute(
+        //     builder: (myContext) => MakeCallPage(user: HomeScreen.userChat),
+        //   ),
+        // );
+        break;
+    }
   }
-}
 
+// to send the review.
+  Future<void> sendReview() async {
+    final InAppReview inAppReview = InAppReview.instance;
+
+    if (await inAppReview.isAvailable()) {
+      inAppReview.requestReview();
+    }
+  }
+
+  Future<void> goToUrl() async {
+    const urlWebsite =
+        "https://play.google.com/store/apps/developer?id=KONAMI&hl=en&gl=US";
+
+    final uriLink = Uri.parse(urlWebsite);
+    launchUrl(uriLink);
+  }
 }

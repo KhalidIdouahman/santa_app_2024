@@ -11,6 +11,12 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>We need access to photos library so that we can save the downloaded image you want</string>
 
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>itms-beta</string>
+		<string>itms</string>
+	</array>
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

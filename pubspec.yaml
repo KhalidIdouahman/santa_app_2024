@@ -60,6 +60,12 @@ dependencies:
   share_plus: ^7.2.1  
   # to push notifications
   flutter_local_notifications: ^16.2.0
+  # to review the app inside the app
+  in_app_review: ^2.0.8
+  # to review the app in playstore or appstore.
+  launch_review: ^3.0.1
+  # to redirect the user to some url
+  url_launcher: ^6.2.2
 
   # to do the header animation , but i didn't work with it .
   # sliver_tools: ^0.2.12
