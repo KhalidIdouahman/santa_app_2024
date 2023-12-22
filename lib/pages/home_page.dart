@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ironsource_mediation/ironsource_mediation.dart';
 import 'package:santa_app_2024/constants/text.dart';
 import 'package:santa_app_2024/models/chat_models/user_chat.dart';
 import 'package:santa_app_2024/pages/calling_page/making_call_page.dart';
@@ -23,7 +24,6 @@ import 'package:santa_app_2024/pages/testing_ads_page.dart';
 // import 'package:santa_app_2024/ads_services/iron_source_ads/interstitial_pusher.dart';
 
 typedef CallbackAction = void Function();
-final IronSourceRewardedVideoPusher videoAd = IronSourceRewardedVideoPusher();
 
 class HomeScreen extends StatelessWidget {
   final List<CameraDescription> camerasDesList;
@@ -107,17 +107,24 @@ class HomeScreen extends StatelessWidget {
         buildAnimatedDialog(
           context: myContext,
           onOkPressed: () {
+            // here when he clicks on unlock btn , i initialize video pusher class and pass to it the function
+            // that will be executed after the video ad is finished , and to listen on it ,
+            // we need to pass the object of the class to the rewarded video listener.
+            final IronSourceRewardedVideoPusher videoAd =
+                IronSourceRewardedVideoPusher(rewardAfterVideoAdCompleted: () {
+              // to navigate to the chat after the ad video is finished
+              Navigator.push(
+                myContext,
+                MaterialPageRoute(
+                  builder: (myContext) => ChatPage(user: HomeScreen.userChat),
+                ),
+              );
+            });
+            IronSource.setLevelPlayRewardedVideoListener(videoAd);
             videoAd.showRewardedVideo();
             // to show the ads video before going to chat page .
-            Navigator.push(
-              myContext,
-              MaterialPageRoute(
-                builder: (myContext) => ChatPage(user: HomeScreen.userChat),
-              ),
-            );
           },
-          onCancelPressed: () {
-          },
+          onCancelPressed: () {},
         );
         break;
       case 2:
@@ -132,17 +139,21 @@ class HomeScreen extends StatelessWidget {
         buildAnimatedDialog(
           context: myContext,
           onOkPressed: () {
-            videoAd.showRewardedVideo();
-            // to show the ads video before going to chat page .
-            Navigator.push(
-              myContext,
-              MaterialPageRoute(
-                builder: (myContext) => MakeVideoCallPage(
-                  user: HomeScreen.userChat,
-                  cameras: camerasDesList,
+            final IronSourceRewardedVideoPusher videoAd =
+                IronSourceRewardedVideoPusher(rewardAfterVideoAdCompleted: () {
+              // to navigate to the chat video after the ad video is finished
+              Navigator.push(
+                myContext,
+                MaterialPageRoute(
+                  builder: (myContext) => MakeVideoCallPage(
+                    user: HomeScreen.userChat,
+                    cameras: camerasDesList,
+                  ),
                 ),
-              ),
-            );
+              );
+            });
+            IronSource.setLevelPlayRewardedVideoListener(videoAd);
+            videoAd.showRewardedVideo();
           },
           onCancelPressed: () {},
         );

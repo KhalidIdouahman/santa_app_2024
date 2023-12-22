@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:santa_app_2024/ads_services/onesignal_ads/one_signal.dart';
 import 'package:santa_app_2024/pages/home_page.dart';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/services.dart';
-import 'package:santa_app_2024/ads_services/iron_source.dart';
+import 'package:santa_app_2024/ads_services/iron_source_ads/iron_source.dart';
 
 late List<CameraDescription> camerasList;
 
@@ -14,8 +15,11 @@ Future<void> main() async {
 
   // initialize ironSource to show ads
   initIronSource();
+  // initialize the oneSignal notifications.
+  initOneSignalNotifications();
 
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
     runApp(const MyApp());
   });
 }

@@ -1,6 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:ironsource_mediation/ironsource_mediation.dart';
 
 class IronSourceRewardedVideoPusher with LevelPlayRewardedVideoListener {
+  // this function contains the actions that will be done after the ad video is finished
+  final VoidCallback rewardAfterVideoAdCompleted;
+
+  IronSourceRewardedVideoPusher({required this.rewardAfterVideoAdCompleted});
+
   Future<void> showRewardedVideo() async {
     IronSource.showRewardedVideo()
         .then((value) {})
@@ -24,6 +30,8 @@ class IronSourceRewardedVideoPusher with LevelPlayRewardedVideoListener {
 
   @override
   void onAdClosed(IronSourceAdInfo adInfo) {
+    // when the video ad finished this function will trigger.
+    rewardAfterVideoAdCompleted();
     print("the ad is closed");
     // TODO: implement onAdClosed
   }

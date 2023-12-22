@@ -27,8 +27,12 @@ class ImagePage extends StatefulWidget {
 class _ImagePageState extends State<ImagePage> {
   late PageController _pageController;
   late int _currentIndex;
-  final IronSourceInterstitialPusher interstitialAd =
-      IronSourceInterstitialPusher();
+  // this obj is to track the showed interstitial and load an other one after the first is finished.
+  final IronSourceInterstitialPusher interstitialAd = IronSourceInterstitialPusher(
+    loadNextInterstitial: () {
+      IronSource.loadInterstitial();
+    },
+  );
 
   int incrementedIndex = 0;
 
@@ -40,6 +44,7 @@ class _ImagePageState extends State<ImagePage> {
   void initState() {
     super.initState();
     IronSource.loadInterstitial();
+    IronSource.setLevelPlayInterstitialListener(interstitialAd);
     // here i initialize the current index to the clicked image , and starts the pageview from it , else he will
     // always starts from the begenning .
     _currentIndex = widget.imgIndex;
@@ -74,8 +79,8 @@ class _ImagePageState extends State<ImagePage> {
                     incrementedIndex++;
                     print("the index is : $incrementedIndex");
                   } else {
-                      interstitialAd.showInterstitialAd();
-                      incrementedIndex = 0;
+                    interstitialAd.showInterstitialAd();
+                    incrementedIndex = 0;
                     print("the index is : $incrementedIndex");
                   }
                 },

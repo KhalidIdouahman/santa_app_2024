@@ -8,6 +8,7 @@ import 'package:santa_app_2024/models/api_wallpaper_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ironsource_mediation/ironsource_mediation.dart';
 import 'package:santa_app_2024/ads_services/iron_source_ads/interstitial_pusher.dart';
+import 'package:santa_app_2024/constants/app_id_and_urls.dart';
 
 class WallpaperPage extends StatefulWidget {
   const WallpaperPage({super.key});
@@ -17,16 +18,17 @@ class WallpaperPage extends StatefulWidget {
 }
 
 class _WallpaperPageState extends State<WallpaperPage> {
-  // this is the url from which i get the wallpapers.
-  final String serverUrl =
-      "https://twicev.com/wallpaper2/api/wallpapers.php?id_cat=2";
-
   final IronSourceInterstitialPusher interstitialAd =
-      IronSourceInterstitialPusher();
+      IronSourceInterstitialPusher(
+    loadNextInterstitial: () {
+      IronSource.loadInterstitial();
+    },
+  );
 
   @override
   void initState() {
     IronSource.loadInterstitial();
+    IronSource.setLevelPlayInterstitialListener(interstitialAd);
     // getImagesList(urlApi: serverUrl);
     super.initState();
   }
