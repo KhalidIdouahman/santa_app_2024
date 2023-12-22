@@ -5,6 +5,8 @@ import 'package:santa_app_2024/pages/calling_page/making_call_page.dart';
 import 'package:santa_app_2024/widgets/counter_call_widgets/counter_call_item.dart';
 
 import 'package:santa_app_2024/functionalities/notifications_handler.dart';
+import 'package:ironsource_mediation/ironsource_mediation.dart';
+import 'package:santa_app_2024/ads_services/iron_source_ads/banner_pusher.dart';
 
 class CounterCallPage extends StatefulWidget {
   const CounterCallPage({super.key});
@@ -14,13 +16,13 @@ class CounterCallPage extends StatefulWidget {
 }
 
 class _CounterCallPageState extends State<CounterCallPage> {
-
 // the instance of the notification handler to work with.
   final NotificationHandler _notificationHandler = NotificationHandler();
 
+  final IronSourceBannerPusher bannerAd = IronSourceBannerPusher();
+
   // in this map i store in it the index of the clicked schedule call , and the and the duration that changes each second.
   final Map<int, int> storeCounterDownTimers = {};
-
 
   @override
   void initState() {
@@ -28,6 +30,15 @@ class _CounterCallPageState extends State<CounterCallPage> {
     // initialize the notifications
     WidgetsFlutterBinding.ensureInitialized();
     _notificationHandler.initNotifications();
+
+    // initialize the banner ads
+    bannerAd.showBannerAd();
+  }
+
+  @override
+  void dispose() {
+    IronSource.destroyBanner();
+    super.dispose();
   }
 
 // in this func i take the index of the clicked item to get from it the duration , and starts the timer.

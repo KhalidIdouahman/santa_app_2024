@@ -69,4 +69,19 @@ flutter {
 
 dependencies {
     implementation 'com.android.support:multidex:2.0.1'
+
+    // this to setup the LevelPlay network adapters like appLovin, facebook,google,unityads...
+
+    // Add Applovin Network
+    implementation 'com.ironsource.adapters:applovinadapter:4.3.40'
+    implementation 'com.applovin:applovin-sdk:11.11.3'
+    // Add Facebook Network
+    implementation 'com.ironsource.adapters:facebookadapter:4.3.45'
+    implementation 'com.facebook.android:audience-network-sdk:6.16.0'
+    // Add AdMob and Ad Manager Network
+    // implementation 'com.google.android.gms:play-services-ads:22.6.0'
+    // implementation 'com.ironsource.adapters:admobadapter:4.3.40'
+    // Add UnityAds Network
+    implementation 'com.ironsource.adapters:unityadsadapter:4.3.34'
+    implementation 'com.unity3d.ads:unity-ads:4.9.2'
 }

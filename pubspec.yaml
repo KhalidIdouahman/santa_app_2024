@@ -66,6 +66,10 @@ dependencies:
   launch_review: ^3.0.1
   # to redirect the user to some url
   url_launcher: ^6.2.2
+  # to show the ads of ironsource
+  ironsource_mediation: ^1.2.0
+  # to show the animated dialog
+  awesome_dialog: ^3.1.0
 
   # to do the header animation , but i didn't work with it .
   # sliver_tools: ^0.2.12

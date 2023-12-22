@@ -7,6 +7,8 @@ import 'package:santa_app_2024/widgets/wallpaper_widgets/build_img_btn.dart';
 
 import 'package:santa_app_2024/constants/text.dart';
 import 'package:santa_app_2024/functionalities/share.dart';
+import 'package:ironsource_mediation/ironsource_mediation.dart';
+import 'package:santa_app_2024/ads_services/iron_source_ads/interstitial_pusher.dart';
 
 typedef CallbackAction = void Function();
 
@@ -25,6 +27,10 @@ class ImagePage extends StatefulWidget {
 class _ImagePageState extends State<ImagePage> {
   late PageController _pageController;
   late int _currentIndex;
+  final IronSourceInterstitialPusher interstitialAd =
+      IronSourceInterstitialPusher();
+
+  int incrementedIndex = 0;
 
 // this was to try downloading the image from the server.
   // String url =
@@ -33,6 +39,7 @@ class _ImagePageState extends State<ImagePage> {
   @override
   void initState() {
     super.initState();
+    IronSource.loadInterstitial();
     // here i initialize the current index to the clicked image , and starts the pageview from it , else he will
     // always starts from the begenning .
     _currentIndex = widget.imgIndex;
@@ -62,6 +69,16 @@ class _ImagePageState extends State<ImagePage> {
             PageView.builder(
                 controller: _pageController,
                 itemCount: widget.imgsList.length,
+                onPageChanged: (value) {
+                  if (incrementedIndex < 2) {
+                    incrementedIndex++;
+                    print("the index is : $incrementedIndex");
+                  } else {
+                      interstitialAd.showInterstitialAd();
+                      incrementedIndex = 0;
+                    print("the index is : $incrementedIndex");
+                  }
+                },
                 itemBuilder: (context, index) {
                   var wallpaperUrl = widget.imgsList[index].wallpaperUrlImg;
                   return buildImage(

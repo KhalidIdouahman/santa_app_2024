@@ -6,6 +6,7 @@ import 'package:santa_app_2024/pages/chat_page.dart';
 import 'package:santa_app_2024/pages/counter_call_page.dart';
 import 'package:santa_app_2024/pages/other_characters_page.dart';
 import 'package:santa_app_2024/pages/wallpaper_page/wallpapers_page.dart';
+import 'package:santa_app_2024/widgets/animated_dialog/custom_dialog.dart';
 import 'package:santa_app_2024/widgets/home_widgets/header_of_home.dart';
 import 'package:santa_app_2024/widgets/home_widgets/home_items.dart';
 import 'package:santa_app_2024/widgets/home_widgets/side_bar_widget.dart';
@@ -17,7 +18,12 @@ import 'package:in_app_review/in_app_review.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:santa_app_2024/ads_services/iron_source_ads/rewarded_video_pusher.dart';
+import 'package:santa_app_2024/pages/testing_ads_page.dart';
+// import 'package:santa_app_2024/ads_services/iron_source_ads/interstitial_pusher.dart';
+
 typedef CallbackAction = void Function();
+final IronSourceRewardedVideoPusher videoAd = IronSourceRewardedVideoPusher();
 
 class HomeScreen extends StatelessWidget {
   final List<CameraDescription> camerasDesList;
@@ -73,7 +79,8 @@ class HomeScreen extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   (context, index) => buildHomeItem(
                     gredientColor: homeItemsData[index].color,
-                    icon: homeItemsData[index].icon,
+                    firstIcon: homeItemsData[index].firstIcon,
+                    lastIcon: homeItemsData[index].lastIcon,
                     title: homeItemsData[index].title,
                     subtitle: homeItemsData[index].subtitle,
                     onItemClicked: () {
@@ -97,11 +104,20 @@ class HomeScreen extends StatelessWidget {
             MaterialPageRoute(builder: (myContext) => const WallpaperPage()));
         break;
       case 1:
-        Navigator.push(
-          myContext,
-          MaterialPageRoute(
-            builder: (myContext) => ChatPage(user: HomeScreen.userChat),
-          ),
+        buildAnimatedDialog(
+          context: myContext,
+          onOkPressed: () {
+            videoAd.showRewardedVideo();
+            // to show the ads video before going to chat page .
+            Navigator.push(
+              myContext,
+              MaterialPageRoute(
+                builder: (myContext) => ChatPage(user: HomeScreen.userChat),
+              ),
+            );
+          },
+          onCancelPressed: () {
+          },
         );
         break;
       case 2:
@@ -113,12 +129,22 @@ class HomeScreen extends StatelessWidget {
         );
         break;
       case 3:
-        Navigator.push(
-          myContext,
-          MaterialPageRoute(
-            builder: (myContext) => MakeVideoCallPage(
-                user: HomeScreen.userChat, cameras: camerasDesList),
-          ),
+        buildAnimatedDialog(
+          context: myContext,
+          onOkPressed: () {
+            videoAd.showRewardedVideo();
+            // to show the ads video before going to chat page .
+            Navigator.push(
+              myContext,
+              MaterialPageRoute(
+                builder: (myContext) => MakeVideoCallPage(
+                  user: HomeScreen.userChat,
+                  cameras: camerasDesList,
+                ),
+              ),
+            );
+          },
+          onCancelPressed: () {},
         );
         break;
       case 4:
@@ -153,13 +179,13 @@ class HomeScreen extends StatelessWidget {
         LaunchReview.launch(androidAppId: "jp.konami.pesam");
         break;
       case 8:
-        goToUrl();
-        // Navigator.push(
-        //   myContext,
-        //   MaterialPageRoute(
-        //     builder: (myContext) => MakeCallPage(user: HomeScreen.userChat),
-        //   ),
-        // );
+        // goToUrl();
+        Navigator.push(
+          myContext,
+          MaterialPageRoute(
+            builder: (myContext) => IronSourceAdsTestPage(),
+          ),
+        );
         break;
     }
   }

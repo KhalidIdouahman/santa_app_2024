@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:santa_app_2024/constants/text.dart';
-import 'package:santa_app_2024/functionalities/fetching_data.dart';
 import 'package:santa_app_2024/models/chat_models/user_chat.dart';
 import 'package:santa_app_2024/pages/calling_page/making_call_page.dart';
+
+// import 'package:santa_app_2024/functionalities/fetching_data.dart';
 
 // i need to search on this to understand it will .
 typedef CallbackAction = void Function();
@@ -26,25 +27,27 @@ class OtherCharactersPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: FutureBuilder(
-          future: getCharactersList(urlApi: serverUrl),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator.adaptive());
-            }
+      body: 
+      // FutureBuilder(
+      //     future: getCharactersList(urlApi: serverUrl),
+      //     builder: (context, snapshot) {
+      //       if (snapshot.connectionState == ConnectionState.waiting) {
+      //         return const Center(child: CircularProgressIndicator.adaptive());
+      //       }
 
-            if (snapshot.hasError) {
-              return Center(
-                  child: Text(
-                snapshot.error.toString(),
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ));
-            }
+      //       if (snapshot.hasError) {
+      //         return Center(
+      //             child: Text(
+      //           snapshot.error.toString(),
+      //           style:
+      //               const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      //         ));
+      //       }
 
-            final List<UserChat> charactersList = snapshot.data!;
+      //       final List<UserChat> charactersList = snapshot.data!;
 
-            return Padding(
+      //       return 
+            Padding(
               padding: const EdgeInsets.only(top: 20),
               child: ListView.builder(
                 itemCount: usersList.length,
@@ -65,8 +68,8 @@ class OtherCharactersPage extends StatelessWidget {
                   );
                 },
               ),
-            );
-          }),
+            ),
+          // }),
     );
   }
 }

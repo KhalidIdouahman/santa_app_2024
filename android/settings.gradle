@@ -14,6 +14,14 @@ pluginManagement {
         id "dev.flutter.flutter-gradle-plugin" version "1.0.0" apply false
     }
 }
+// this to setup the  LevelPlay network adapters like appLovin, facebook,google,unityads...
+dependencyResolutionManagement { 
+    repositories { 
+         maven { 
+              url 'https://android-sdk.is.com/' 
+          } 
+     } 
+}
 
 include ":app"
 

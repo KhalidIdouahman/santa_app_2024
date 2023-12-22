@@ -6,6 +6,8 @@ import 'package:santa_app_2024/functionalities/fetching_data.dart';
 import 'package:santa_app_2024/models/api_wallpaper_model.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ironsource_mediation/ironsource_mediation.dart';
+import 'package:santa_app_2024/ads_services/iron_source_ads/interstitial_pusher.dart';
 
 class WallpaperPage extends StatefulWidget {
   const WallpaperPage({super.key});
@@ -19,11 +21,15 @@ class _WallpaperPageState extends State<WallpaperPage> {
   final String serverUrl =
       "https://twicev.com/wallpaper2/api/wallpapers.php?id_cat=2";
 
-  // @override
-  // void initState() {
-  //   getImagesList(urlApi: serverUrl);
-  //   super.initState();
-  // }
+  final IronSourceInterstitialPusher interstitialAd =
+      IronSourceInterstitialPusher();
+
+  @override
+  void initState() {
+    IronSource.loadInterstitial();
+    // getImagesList(urlApi: serverUrl);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +69,7 @@ class _WallpaperPageState extends State<WallpaperPage> {
                 for (int i = 0; i < wallpapers.length; i++)
                   GestureDetector(
                     onTap: () {
+                      interstitialAd.showInterstitialAd();
                       // this two lines are the same .
                       // context.pushTransparentRoute(ImagePage(imgIndex: i , imgUrl: imagesList[i], ));
                       Navigator.of(context).push(

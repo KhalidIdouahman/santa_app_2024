@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 // i add this line to to make the onItemClicked work
 typedef CallbackAction = void Function();
 
+// i made these changes of adding the last icon to show the locked features to open them with ads .
+
 Widget buildHomeItem(
-    {required IconData icon, required String title, required String subtitle ,
+    {required IconData firstIcon, required IconData lastIcon ,required String title, required String subtitle ,
      required List<Color> gredientColor , required CallbackAction onItemClicked}) {
 
   return Container(
-    padding: EdgeInsets.all(5),
-    margin: EdgeInsets.symmetric(vertical: 10),
+    padding: const EdgeInsets.all(5),
+    margin: const EdgeInsets.symmetric(vertical: 10),
     decoration: BoxDecoration(
         gradient: LinearGradient(
             colors: gredientColor,
@@ -17,25 +19,25 @@ Widget buildHomeItem(
             end: Alignment.topRight),
         borderRadius: BorderRadius.circular(20)),
     child: ListTile(
-      leading: Icon(icon, color:  Colors.white, size: 50),
+      leading: Icon(firstIcon, color:  Colors.white, size: 50),
       title: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
             color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
       ),
       subtitle: Text(
         subtitle,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
       trailing: Icon(
-        Icons.arrow_forward_ios,
+        lastIcon,
         color: Colors.white,
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
       onTap: onItemClicked,
-      contentPadding: EdgeInsets.all(5),
+      contentPadding: const EdgeInsets.all(5),
     ),
   );
 }

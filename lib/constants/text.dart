@@ -7,47 +7,56 @@ import 'package:santa_app_2024/models/schedule_call.dart';
 
 final List<HomeItemsData> homeItemsData = [
   HomeItemsData(
-      icon: Icons.image_rounded,
+      firstIcon: Icons.image_rounded,
+      lastIcon: Icons.arrow_forward_ios_rounded,
       title: "Wallpapers",
       subtitle: "A lot of awesome wallpapers",
       color: gredientColor1),
   HomeItemsData(
-      icon: Icons.chat_bubble_outline,
+      firstIcon: Icons.chat_bubble_outline,
+      lastIcon: Icons.lock,
       title: "Chat",
       subtitle: "Open chat and talk!",
       color: gredientColor2),
   HomeItemsData(
-      icon: Icons.call,
+      firstIcon: Icons.call,
+      lastIcon: Icons.arrow_forward_ios_rounded,
       title: "Calling",
       subtitle: "Call Puppet now!",
       color: gredientColor3),
   HomeItemsData(
-      icon: Icons.videocam,
+      firstIcon: Icons.videocam,
+      lastIcon: Icons.lock,
       title: "Video Call",
       subtitle: "Make Video Call Camera",
       color: gredientColor4),
   HomeItemsData(
-      icon: Icons.group,
+      firstIcon: Icons.group,
+      lastIcon: Icons.arrow_forward_ios_rounded,
       title: "Other Characters",
       subtitle: "Call and chat Other Puppets",
       color: gredientColor5),
   HomeItemsData(
-      icon: Icons.alarm,
+      firstIcon: Icons.alarm,
+      lastIcon: Icons.arrow_forward_ios_rounded,
       title: "Counter Call",
       subtitle: "Start call with counter time",
       color: gredientColor6),
   HomeItemsData(
-      icon: Icons.share,
+      firstIcon: Icons.share,
+      lastIcon: Icons.arrow_forward_ios_rounded,
       title: "Share it",
       subtitle: "Share and have fun with friends",
       color: gredientColor7),
   HomeItemsData(
-      icon: Icons.star_rate_rounded,
+      firstIcon: Icons.star_rate_rounded,
+      lastIcon: Icons.arrow_forward_ios_rounded,
       title: "Rate Us",
       subtitle: "Rate your hero",
       color: gredientColor8),
   HomeItemsData(
-      icon: Icons.more_horiz,
+      firstIcon: Icons.more_horiz,
+      lastIcon: Icons.arrow_forward_ios_rounded,
       title: "More Apps",
       subtitle: "Discover our apps and enjoy",
       color: gredientColor9),
@@ -196,22 +205,22 @@ final List<ScheduleCallObj> scheduleCalls = [
   ),
 ];
 
-final List<String> imagesList = [
-  "assets/images/santa_calling.jpg",
-  "assets/images/santa_calling_2.jpg",
-  "assets/images/santa_calling.jpg",
-  "assets/images/santa_calling_2.jpg",
-  "assets/images/santa_calling.jpg",
-  "assets/images/santa_calling_2.jpg",
-  "assets/images/santa_calling.jpg",
-  "assets/images/santa_calling_2.jpg",
-  "assets/images/santa_calling.jpg",
-  "assets/images/santa_calling_2.jpg",
-  "assets/images/santa_calling.jpg",
-  "assets/images/santa_calling_2.jpg",
-  "assets/images/santa_calling.jpg",
-  "assets/images/santa_calling_2.jpg",
-];
+// final List<String> imagesList = [
+//   "assets/images/santa_calling.jpg",
+//   "assets/images/santa_calling_2.jpg",
+//   "assets/images/santa_calling.jpg",
+//   "assets/images/santa_calling_2.jpg",
+//   "assets/images/santa_calling.jpg",
+//   "assets/images/santa_calling_2.jpg",
+//   "assets/images/santa_calling.jpg",
+//   "assets/images/santa_calling_2.jpg",
+//   "assets/images/santa_calling.jpg",
+//   "assets/images/santa_calling_2.jpg",
+//   "assets/images/santa_calling.jpg",
+//   "assets/images/santa_calling_2.jpg",
+//   "assets/images/santa_calling.jpg",
+//   "assets/images/santa_calling_2.jpg",
+// ];
 
 // the app url to be used in sharing images and the app.
 const String appUrl = "https://this_is_the_link_of_the_app.com";
