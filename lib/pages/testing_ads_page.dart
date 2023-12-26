@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:ironsource_mediation/ironsource_mediation.dart';
 // import 'package:santa_app_2024/ads_services/iron_source.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:santa_app_2024/ads_services/ad_mob_ads/native_ads/home_native_ad.dart';
 
 class IronSourceAdsTestPage extends StatefulWidget {
   @override
@@ -17,6 +21,7 @@ class _IronSourceAdsTestPageState extends State<IronSourceAdsTestPage> {
     // initIronSource();
     // Load Interstitial ad
     IronSource.loadInterstitial();
+    dispalyAdBanner(bannerAdMob);
   }
 
   void _showBannerAd() async {
@@ -48,6 +53,43 @@ class _IronSourceAdsTestPageState extends State<IronSourceAdsTestPage> {
     });
   }
 
+  BannerAd? bannerAdMob;
+  bool isBannerAdMobLoaded = false;
+
+  void dispalyAdBanner(BannerAd? adBanenr) {
+    final adUnitId = Platform.isAndroid
+        ? 'ca-app-pub-3940256099942544/6300978111'
+        : 'ca-app-pub-3940256099942544/2934735716';
+
+    adBanenr = BannerAd(
+      adUnitId: adUnitId,
+      request: const AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        // Called when an ad is successfully received.
+        onAdLoaded: (ad) {
+          print('$ad this ad has been loaded successfuly , thanks.');
+          setState(() {
+            isBannerAdMobLoaded = true;
+          });
+        },
+        // Called when an ad request failed.
+        onAdFailedToLoad: (ad, err) {
+          print('BannerAd failed to load: $err');
+          isBannerAdMobLoaded = false;
+          // Dispose the ad here to free resources.
+          ad.dispose();
+        },
+        // Called when an ad opens an overlay that covers the screen.
+        onAdOpened: (Ad ad) {},
+        // Called when an ad removes an overlay that covers the screen.
+        onAdClosed: (Ad ad) {},
+        // Called when an impression occurs on the ad.
+        onAdImpression: (Ad ad) {},
+      ),
+    )..load();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,6 +104,25 @@ class _IronSourceAdsTestPageState extends State<IronSourceAdsTestPage> {
               onPressed: _showBannerAd,
               child: Text('Show Banner Ad'),
             ),
+            // ElevatedButton(
+            //   onPressed: () {},
+            //   child: Text('Show Admob Banner Ad'),
+            // ),
+            bannerAdMob != null
+                ? Container(
+                    color: Colors.red,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SafeArea(
+                        child: SizedBox(
+                          width: bannerAdMob!.size.width.toDouble(),
+                          height: bannerAdMob!.size.height.toDouble(),
+                          child: AdWidget(ad: bannerAdMob!),
+                        ),
+                      ),
+                    ),
+                  )
+                : Container(),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: _showInterstitialAd,
@@ -72,6 +133,16 @@ class _IronSourceAdsTestPageState extends State<IronSourceAdsTestPage> {
               onPressed: _showRewardedVideoAd,
               child: Text('Show Rewarded Video Ad'),
             ),
+            // ConstrainedBox(
+            //   constraints: const BoxConstraints(
+            //     minWidth: 320, // minimum recommended width
+            //     minHeight: 90, // minimum recommended height
+            //     maxWidth: 330,
+            //     maxHeight: 100,
+            //   ),
+            //   child: const NativeAdWidget(),
+            // )
+            const NativeAdWidget(maxWidth: 330,maxHeight: 100,adSize: TemplateType.small,),
           ],
         ),
       ),

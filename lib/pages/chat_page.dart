@@ -6,6 +6,8 @@ import 'package:santa_app_2024/widgets/chat_widgets/chat_appbar.dart';
 import 'package:santa_app_2024/widgets/chat_widgets/chat_msg_bubble.dart';
 import 'package:santa_app_2024/widgets/chat_widgets/chat_text_holder.dart';
 
+import 'package:audioplayers/audioplayers.dart';
+
 class ChatPage extends StatefulWidget {
   final UserChat user;
   const ChatPage({super.key, required this.user});
@@ -17,6 +19,19 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   List<ChatText> chatItemsList = [];
   List<ChatText> chatMessagesList = [];
+  bool isResponseLoaded = false;
+  bool isTyping = false;
+  // i still didn't work with these variables to show the animation
+  bool isResponseListChanged = false;
+  // int responseListLength = 0;
+
+  void messageSound() async {
+    final audioPlayer = AudioPlayer();
+    const String messageSound = "sounds/iphone_sms_ringtone.mp3";
+    // make the file path string to a source to work in the audio player.
+    // this plays the audio
+    await audioPlayer.play(AssetSource(messageSound));
+  }
 
   @override
   void initState() {
@@ -32,7 +47,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     // print(chatItemsList);
     return Scaffold(
-      appBar: buildAppBar(widget.user),
+      appBar: buildAppBar(widget.user, isTyping),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -41,10 +56,15 @@ class _ChatPageState extends State<ChatPage> {
               child: ListView.builder(
                 itemCount: chatMessagesList.length,
                 itemBuilder: (context, index) {
-                    bool isMeTheSender = chatMessagesList[index].isMe;
+                  bool isMeTheSender = chatMessagesList[index].isMe;
                   return buildChatMessageBubble(
-                      text: isMeTheSender ? chatMessagesList[index].chatQuestion : chatMessagesList[index].chatResponse,
-                      isMe: isMeTheSender);
+                    text: isMeTheSender
+                        ? chatMessagesList[index].chatQuestion
+                        : chatMessagesList[index].chatResponse,
+                    isMe: isMeTheSender,
+                    isLoaded: isResponseLoaded,
+                    isResponseAdded: isResponseListChanged,
+                  );
                 },
               ),
             ),
@@ -65,6 +85,7 @@ class _ChatPageState extends State<ChatPage> {
                         chatMessagesList.add(ChatText(
                             chatQuestion: message.chatQuestion,
                             chatResponse: ""));
+                        isTyping = true;
                         sendResponse(message);
                         chatItemsList.removeAt(index);
                       });
@@ -80,12 +101,23 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-// this function's role is to send the response to when he send a question .
+// this function's role is to send the response to the user when he send a question .
+// i was trying to add the animation when the response is about to show , but i face some issues,
+// until i fix them , but i added the sound when the response is showing , and the effect of the appbar
+// to show online or typing... 
   Future<void> sendResponse(ChatText message) async {
+    // setState(() {
+    //   isResponseLoaded = false;
+    // });
+    print("$isResponseLoaded in first");
     await Future.delayed(const Duration(seconds: 3));
     setState(() {
+      messageSound();
+      isResponseLoaded = true;
+      isTyping = false;
       chatMessagesList.add(ChatText(
           chatQuestion: "", chatResponse: message.chatResponse, isMe: false));
     });
+    print("$isResponseLoaded in last");
   }
 }

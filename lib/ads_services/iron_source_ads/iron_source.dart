@@ -2,10 +2,8 @@ import 'dart:io';
 // import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ironsource_mediation/ironsource_mediation.dart';
+import 'package:santa_app_2024/constants/app_id_and_urls.dart';
 
-// const String ANDROID_APP_KEY = "1cec653e5";
-const String ANDROID_APP_KEY = "1804d5bed";
-const String IOS_APP_KEY = "1cec653e5";
 
 Future<void> initIronSource() async {
   final appKey = Platform.isAndroid

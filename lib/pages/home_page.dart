@@ -21,14 +21,27 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'package:santa_app_2024/ads_services/iron_source_ads/rewarded_video_pusher.dart';
 import 'package:santa_app_2024/pages/testing_ads_page.dart';
-// import 'package:santa_app_2024/ads_services/iron_source_ads/interstitial_pusher.dart';
+// import 'package:santa_app_2024/ads_services/ad_mob_ads/open_app_admob.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:santa_app_2024/ads_services/ad_mob_ads/native_ads/home_native_ad.dart';
 
 typedef CallbackAction = void Function();
+final UserChat userChat = usersList.first;
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   final List<CameraDescription> camerasDesList;
   const HomeScreen({super.key, required this.camerasDesList});
-  static final UserChat userChat = usersList.first;
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,66 +50,77 @@ class HomeScreen extends StatelessWidget {
       // because he needs a context inside the scaffold widget.
       // to show the sidebar
       drawer: const NavBar(),
-      body: Builder(builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          // this customScrollView is the widget who let the header animates depanding on scrolling.
-          child: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                // this the height before scrolling .
-                expandedHeight: MediaQuery.of(context).size.height * 0.35,
-                // Keep the header visible when scrolling
-                pinned: true,
-                // this is the height in which the header stops scrolling
-                toolbarHeight: MediaQuery.of(context).size.height * 0.18,
-                // to avoid the shadow below the header
-                elevation: 0,
-                // to avoid the blue color of the appbar
-                backgroundColor: Colors.transparent,
-                // to hide the button of the menubar
-                automaticallyImplyLeading: false,
-                // here when i show the header and he makes it animate when scrolling.
-                flexibleSpace: FlexibleSpaceBar(
-                  // i give it to the title because it animate by its self
-                  title: buildHeader(
-                    context: context,
-                    onSettingsClicked: () {
-                      Scaffold.of(context).openDrawer();
-                    },
-                    onFavoriteClicked: () {
-                      print("favorite icon clicked.");
-                    },
+      body: Builder(
+        builder: (context) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            // this customScrollView is the widget who let the header animates depanding on scrolling.
+            child: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  // this the height before scrolling .
+                  expandedHeight: MediaQuery.of(context).size.height * 0.35,
+                  // Keep the header visible when scrolling
+                  pinned: true,
+                  // this is the height in which the header stops scrolling
+                  toolbarHeight: MediaQuery.of(context).size.height * 0.18,
+                  // to avoid the shadow below the header
+                  elevation: 0,
+                  // to avoid the blue color of the appbar
+                  backgroundColor: Colors.transparent,
+                  // to hide the button of the menubar
+                  automaticallyImplyLeading: false,
+                  // here when i show the header and he makes it animate when scrolling.
+                  flexibleSpace: FlexibleSpaceBar(
+                    // i give it to the title because it animate by its self
+                    title: buildHeader(
+                      context: context,
+                      onSettingsClicked: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                      onFavoriteClicked: () {
+                        print("favorite icon clicked.");
+                      },
+                    ),
+                    centerTitle: true,
+                    // the way how the animation goes.
+                    expandedTitleScale: 1.08,
                   ),
-                  centerTitle: true,
-                  // the way how the animation goes.
-                  expandedTitleScale: 1.08,
                 ),
-              ),
 
-              // and this creates the list of items that has the ability to push the header to the top .
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) => buildHomeItem(
-                    gredientColor: homeItemsData[index].color,
-                    firstIcon: homeItemsData[index].firstIcon,
-                    lastIcon: homeItemsData[index].lastIcon,
-                    title: homeItemsData[index].title,
-                    subtitle: homeItemsData[index].subtitle,
-                    onItemClicked: () {
-                      selectedItem(context, index);
+                // and this creates the list of items that has the ability to push the header to the top .
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      // this for showing the native ads, in the home items.
+                      if (index == 3) {
+                        return const NativeAdWidget(maxWidth: 320, maxHeight: 90 , adSize: TemplateType.small);
+                      } else {
+                        return buildHomeItem(
+                          gredientColor: homeItemsData[index].color,
+                          firstIcon: homeItemsData[index].firstIcon,
+                          lastIcon: homeItemsData[index].lastIcon,
+                          title: homeItemsData[index].title,
+                          subtitle: homeItemsData[index].subtitle,
+                          onItemClicked: () {
+                            selectedItem(context, index);
+                          },
+                        );
+                      }
                     },
+                    childCount: homeItemsData.length ,
                   ),
-                  childCount: homeItemsData.length,
                 ),
-              ),
-            ],
-          ),
-        );
-      }),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
+// i added one to the items from 2 until the end , because i added an empty item in the index 3,
+// to show the adds in that index.
   void selectedItem(BuildContext myContext, int index) {
     switch (index) {
       case 0:
@@ -116,7 +140,7 @@ class HomeScreen extends StatelessWidget {
               Navigator.push(
                 myContext,
                 MaterialPageRoute(
-                  builder: (myContext) => ChatPage(user: HomeScreen.userChat),
+                  builder: (myContext) => ChatPage(user: userChat),
                 ),
               );
             });
@@ -131,11 +155,11 @@ class HomeScreen extends StatelessWidget {
         Navigator.push(
           myContext,
           MaterialPageRoute(
-            builder: (myContext) => MakeCallPage(user: HomeScreen.userChat),
+            builder: (myContext) => MakeCallPage(user: userChat),
           ),
         );
         break;
-      case 3:
+      case 4:
         buildAnimatedDialog(
           context: myContext,
           onOkPressed: () {
@@ -146,8 +170,8 @@ class HomeScreen extends StatelessWidget {
                 myContext,
                 MaterialPageRoute(
                   builder: (myContext) => MakeVideoCallPage(
-                    user: HomeScreen.userChat,
-                    cameras: camerasDesList,
+                    user: userChat,
+                    cameras: widget.camerasDesList,
                   ),
                 ),
               );
@@ -158,7 +182,7 @@ class HomeScreen extends StatelessWidget {
           onCancelPressed: () {},
         );
         break;
-      case 4:
+      case 5:
         Navigator.push(
           myContext,
           MaterialPageRoute(
@@ -166,7 +190,7 @@ class HomeScreen extends StatelessWidget {
           ),
         );
         break;
-      case 5:
+      case 6:
         Navigator.push(
           myContext,
           MaterialPageRoute(
@@ -174,14 +198,14 @@ class HomeScreen extends StatelessWidget {
           ),
         );
         break;
-      case 6:
+      case 7:
         shareData(
           message:
               "Take a look to this beautiful app , I am sure you will like it. 😍❤",
           url: appUrl,
         );
         break;
-      case 7:
+      case 8:
         // this for rating the app in the app itself , but it works only when the app is in the store,
         // because it get the app id directly from the build.gradle , "com.example.santa-2024".
         // sendReview();
@@ -189,7 +213,7 @@ class HomeScreen extends StatelessWidget {
         // method it will get the app id and redirect it to the app in the store .
         LaunchReview.launch(androidAppId: "jp.konami.pesam");
         break;
-      case 8:
+      case 9:
         // goToUrl();
         Navigator.push(
           myContext,

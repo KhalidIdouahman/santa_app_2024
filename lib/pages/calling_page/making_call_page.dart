@@ -25,6 +25,13 @@ class _MakeCallPageState extends State<MakeCallPage> {
   }
 
   @override
+  void dispose() {
+    // this to stop the sound when he quit the page
+    makingSound.stopSound();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(

@@ -72,6 +72,10 @@ dependencies:
   awesome_dialog: ^3.1.0
   # to show notification ads
   onesignal_flutter: ^5.0.4
+  # to show app open ads and google native ads
+  google_mobile_ads: ^4.0.0
+  # to show the animation in chat page of typing
+  lottie: ^2.7.0
 
   # to do the header animation , but i didn't work with it .
   # sliver_tools: ^0.2.12
@@ -102,6 +106,7 @@ flutter:
   assets:
     - assets/images/
     - assets/sounds/
+    - assets/animation/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

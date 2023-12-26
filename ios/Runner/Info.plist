@@ -31,6 +31,11 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 
+<!-- it needs here the adMod app id -->
+<!-- TODO: this one here is just for test -->
+    <key>GADApplicationIdentifier</key>
+    <string>ca-app-pub-3940256099942544~3347511713</string>
+
 
 	<key>SKAdNetworkItems</key>
 	<array>

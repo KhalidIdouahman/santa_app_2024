@@ -5,6 +5,8 @@ import 'package:santa_app_2024/models/chat_models/user_chat.dart';
 import 'package:santa_app_2024/models/home_item_data.dart';
 import 'package:santa_app_2024/models/schedule_call.dart';
 
+// i added this empty item to show in them the native ads.
+
 final List<HomeItemsData> homeItemsData = [
   HomeItemsData(
       firstIcon: Icons.image_rounded,
@@ -24,6 +26,12 @@ final List<HomeItemsData> homeItemsData = [
       title: "Calling",
       subtitle: "Call Puppet now!",
       color: gredientColor3),
+  HomeItemsData(
+      firstIcon: Icons.share,
+      lastIcon: Icons.arrow_forward_ios_rounded,
+      title: "",
+      subtitle: "",
+      color: gredientColor7),
   HomeItemsData(
       firstIcon: Icons.videocam,
       lastIcon: Icons.lock,
@@ -204,23 +212,6 @@ final List<ScheduleCallObj> scheduleCalls = [
     sufixIcon: Icons.call,
   ),
 ];
-
-// final List<String> imagesList = [
-//   "assets/images/santa_calling.jpg",
-//   "assets/images/santa_calling_2.jpg",
-//   "assets/images/santa_calling.jpg",
-//   "assets/images/santa_calling_2.jpg",
-//   "assets/images/santa_calling.jpg",
-//   "assets/images/santa_calling_2.jpg",
-//   "assets/images/santa_calling.jpg",
-//   "assets/images/santa_calling_2.jpg",
-//   "assets/images/santa_calling.jpg",
-//   "assets/images/santa_calling_2.jpg",
-//   "assets/images/santa_calling.jpg",
-//   "assets/images/santa_calling_2.jpg",
-//   "assets/images/santa_calling.jpg",
-//   "assets/images/santa_calling_2.jpg",
-// ];
 
 // the app url to be used in sharing images and the app.
 const String appUrl = "https://this_is_the_link_of_the_app.com";

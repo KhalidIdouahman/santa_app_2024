@@ -6,6 +6,8 @@ import 'package:camera/camera.dart';
 import 'package:flutter/services.dart';
 import 'package:santa_app_2024/ads_services/iron_source_ads/iron_source.dart';
 
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 late List<CameraDescription> camerasList;
 
 Future<void> main() async {
@@ -17,6 +19,8 @@ Future<void> main() async {
   initIronSource();
   // initialize the oneSignal notifications.
   initOneSignalNotifications();
+  // initialize app open adMob ads
+  MobileAds.instance.initialize();
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {

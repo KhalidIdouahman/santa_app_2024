@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:santa_app_2024/models/chat_models/user_chat.dart';
 
-AppBar buildAppBar(UserChat user) {
+// i change the colors of the app bar, and the state of santa when chating , is typing or not.
+
+AppBar buildAppBar(UserChat user , bool isTyping) {
   return AppBar(
     elevation: 0,
-    foregroundColor: Colors.black,
-    backgroundColor: Colors.transparent,
+    foregroundColor: Colors.white,
+    // foregroundColor: Colors.black,
+    // backgroundColor: Colors.transparent,
+    backgroundColor: Colors.blue,
     title: Row(
       children: [
         // CircleAvatar(
@@ -28,12 +32,13 @@ AppBar buildAppBar(UserChat user) {
               style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black),
+                  // color: Colors.black,
+                  ),
             ),
             Text(
-              user.userStatus,
-              style: user.userStatus == 'Online'
-                  ? const TextStyle(fontSize: 14, color: Colors.green)
+              isTyping ? "Typing..." : user.userStatus,
+              style: user.userStatus == 'Online' || user.userStatus == "Typing..."
+                  ? const TextStyle(fontSize: 14, color: Colors.white)
                   : const TextStyle(fontSize: 14, color: Colors.grey),
             ),
           ],
@@ -49,7 +54,7 @@ AppBar buildAppBar(UserChat user) {
           },
           child: const Icon(
             Icons.call,
-            color: Colors.black,
+            // color: Colors.black,
           ),
         ),
       )
