@@ -84,4 +84,7 @@ dependencies {
     // Add UnityAds Network
     implementation 'com.ironsource.adapters:unityadsadapter:4.3.34'
     implementation 'com.unity3d.ads:unity-ads:4.9.2'
+
+    // for adding the appsflyer
+    // implementation 'com.appsflyer:af-android-sdk:6.12.5'
 }

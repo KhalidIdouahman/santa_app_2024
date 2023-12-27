@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:santa_app_2024/constants/app_id_and_urls.dart';
-import 'package:santa_app_2024/constants/colors.dart';
+// import 'package:santa_app_2024/constants/colors.dart';
 
 class NativeAdWidget extends StatefulWidget {
   // i get this data to work with this class for both small and medium native ads.
@@ -67,15 +67,16 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
   Widget build(BuildContext context) {
     if (nativeAd != null) {
       return Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: gredientColor1,
-            begin: Alignment.topLeft,
-            end: Alignment.topRight,
-          ),
-          borderRadius: BorderRadius.circular(20),
-        ),
+        // all this design is hided by the ads, 
+        // margin: const EdgeInsets.symmetric(vertical: 10),
+        // decoration: BoxDecoration(
+        //   gradient: LinearGradient(
+        //     colors: gredientColor1,
+        //     begin: Alignment.topLeft,
+        //     end: Alignment.topRight,
+        //   ),
+        //   borderRadius: BorderRadius.circular(20),
+        // ),
         child: _nativeAdIsLoaded
             ? ConstrainedBox(
                 constraints: BoxConstraints(

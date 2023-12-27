@@ -15,15 +15,17 @@ import 'package:santa_app_2024/widgets/home_widgets/side_bar_widget.dart';
 import 'package:camera/camera.dart';
 import 'package:santa_app_2024/pages/video_call_page/making_video_call_page.dart';
 import 'package:santa_app_2024/functionalities/share.dart';
-import 'package:in_app_review/in_app_review.dart';
-import 'package:launch_review/launch_review.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:in_app_review/in_app_review.dart';
+// import 'package:launch_review/launch_review.dart';
+// import 'package:url_launcher/url_launcher.dart';
 
 import 'package:santa_app_2024/ads_services/iron_source_ads/rewarded_video_pusher.dart';
-import 'package:santa_app_2024/pages/testing_ads_page.dart';
+import 'package:santa_app_2024/ads_services/iron_source_ads/banner_pusher.dart';
+// import 'package:santa_app_2024/pages/testing_ads_page.dart';
 // import 'package:santa_app_2024/ads_services/ad_mob_ads/open_app_admob.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:santa_app_2024/ads_services/ad_mob_ads/native_ads/home_native_ad.dart';
+import 'package:santa_app_2024/constants/app_id_and_urls.dart';
 
 typedef CallbackAction = void Function();
 final UserChat userChat = usersList.first;
@@ -37,10 +39,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final IronSourceBannerPusher _bannerPusher = IronSourceBannerPusher();
 
   @override
   void initState() {
     super.initState();
+    _bannerPusher.showBannerAd();
   }
 
   @override
@@ -79,6 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Scaffold.of(context).openDrawer();
                       },
                       onFavoriteClicked: () {
+                        // redirect it to playstore
+                        reviewInTheStore("jp.konami.pesam", "");
                         print("favorite icon clicked.");
                       },
                     ),
@@ -94,7 +100,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     (context, index) {
                       // this for showing the native ads, in the home items.
                       if (index == 3) {
-                        return const NativeAdWidget(maxWidth: 320, maxHeight: 90 , adSize: TemplateType.small);
+                        return const NativeAdWidget(
+                            maxWidth: 320,
+                            maxHeight: 90,
+                            adSize: TemplateType.small);
                       } else {
                         return buildHomeItem(
                           gredientColor: homeItemsData[index].color,
@@ -108,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       }
                     },
-                    childCount: homeItemsData.length ,
+                    childCount: homeItemsData.length,
                   ),
                 ),
               ],
@@ -211,34 +220,19 @@ class _HomeScreenState extends State<HomeScreen> {
         // sendReview();
         // and this pushes the user to give a rate in playstore , and if we don't specified any parameter to launch
         // method it will get the app id and redirect it to the app in the store .
-        LaunchReview.launch(androidAppId: "jp.konami.pesam");
+        reviewInTheStore("jp.konami.pesam", "");
         break;
       case 9:
-        // goToUrl();
-        Navigator.push(
-          myContext,
-          MaterialPageRoute(
-            builder: (myContext) => IronSourceAdsTestPage(),
-          ),
-        );
+        // this and sendReview functions will be in the same file named: share
+        goToUrl(urlWebsite);
+        // this was just for testing ads in new simple page.
+        // Navigator.push(
+        //   myContext,
+        //   MaterialPageRoute(
+        //     builder: (myContext) => IronSourceAdsTestPage(),
+        //   ),
+        // );
         break;
     }
-  }
-
-// to send the review.
-  Future<void> sendReview() async {
-    final InAppReview inAppReview = InAppReview.instance;
-
-    if (await inAppReview.isAvailable()) {
-      inAppReview.requestReview();
-    }
-  }
-
-  Future<void> goToUrl() async {
-    const urlWebsite =
-        "https://play.google.com/store/apps/developer?id=KONAMI&hl=en&gl=US";
-
-    final uriLink = Uri.parse(urlWebsite);
-    launchUrl(uriLink);
   }
 }

@@ -6,6 +6,9 @@ import 'package:ironsource_mediation/ironsource_mediation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:santa_app_2024/ads_services/ad_mob_ads/native_ads/home_native_ad.dart';
 
+// this page i do it just for testing the ads.
+// i will delete it when try to release the app.
+
 class IronSourceAdsTestPage extends StatefulWidget {
   @override
   _IronSourceAdsTestPageState createState() => _IronSourceAdsTestPageState();
@@ -104,10 +107,12 @@ class _IronSourceAdsTestPageState extends State<IronSourceAdsTestPage> {
               onPressed: _showBannerAd,
               child: Text('Show Banner Ad'),
             ),
-            // ElevatedButton(
-            //   onPressed: () {},
-            //   child: Text('Show Admob Banner Ad'),
-            // ),
+            ElevatedButton(
+              onPressed: () {
+                
+              },
+              child: Text('Show Ironsouce Banner Ad from my class'),
+            ),
             bannerAdMob != null
                 ? Container(
                     color: Colors.red,

@@ -73,7 +73,7 @@ class _WallpaperPageState extends State<WallpaperPage> {
               crossAxisSpacing: 10,
               // this to make the image like portrait mode , the height will be more than the width ,
               // if you want it to be stretched horizontaly , you make it above 1 , like 1.6 .
-              childAspectRatio: 0.8,
+              childAspectRatio: 0.5, // 0.8
               children: [
                 for (int i = 0; i < wallpapers.length; i++)
                   GestureDetector(
@@ -109,8 +109,8 @@ class _WallpaperPageState extends State<WallpaperPage> {
                             ),
                           )
                         : const NativeAdWidget(
-                            maxWidth: 420,
-                            maxHeight: 450,
+                            maxWidth: 320,
+                            maxHeight: 360,
                             adSize: TemplateType.medium,
                           ),
                   )

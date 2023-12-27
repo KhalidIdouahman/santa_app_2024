@@ -90,7 +90,7 @@ class _ImagePageState extends State<ImagePage> {
                     imageIndex: index,
                     // it is necessare to get the imgUrl from the list to display the image in the right index .
                     imageUrl: wallpaperUrl,
-                    shareBtn: buildImageBtn(Icons.save_alt_rounded, () {
+                    downloadBtn: buildImageBtn(Icons.save_alt_rounded, () {
                       // downloadImgWithPerimssion(url);
                       // _saveImg(url, true);
                       saveImage(wallpaperUrl);
@@ -99,7 +99,7 @@ class _ImagePageState extends State<ImagePage> {
                               Text("The image was downloaded successfully.")));
                       print("downloaded");
                     }),
-                    downloadBtn: buildImageBtn(Icons.share, () {
+                    shareBtn: buildImageBtn(Icons.share, () {
                       shareData(
                         message:
                             "Take a look to this beautiful app , I am sure you will like it. 😍❤",

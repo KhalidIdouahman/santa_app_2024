@@ -19,7 +19,8 @@ Widget buildImage({
           ),
         ),
         child: Container(
-          padding: const EdgeInsets.only(bottom: 50),
+          // i change it to show the ironsource ad banner in bottom of them.
+          padding: const EdgeInsets.only(bottom: 70),
           alignment: Alignment.bottomCenter,
           // color: Colors.black.withOpacity(0.3),
           child: Row(

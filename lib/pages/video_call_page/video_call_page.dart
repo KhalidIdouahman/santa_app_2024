@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ironsource_mediation/ironsource_mediation.dart';
+import 'package:santa_app_2024/ads_services/iron_source_ads/interstitial_pusher.dart';
 import 'package:santa_app_2024/widgets/calling_widgets/calling_btn.dart';
 
 import 'package:video_player/video_player.dart';
@@ -19,6 +21,12 @@ class _VideoCallPageState extends State<VideoCallPage> {
   // final String videoUrl = "https://www.youtube.com/watch?v=WVbWdeloQ4s";
 
   late CameraController _cameraController;
+
+  // to show an interstitial after ending the video call.
+  IronSourceInterstitialPusher interstitialPusher =
+      IronSourceInterstitialPusher(loadNextInterstitial: () {
+    IronSource.loadInterstitial();
+  });
 
   Future<void> startCamera() async {
     // Filter cameras to include only front cameras
@@ -55,6 +63,8 @@ class _VideoCallPageState extends State<VideoCallPage> {
       });
     // initialize the camera.
     startCamera();
+    // load the interstitial ad to be ready
+    IronSource.loadInterstitial();
   }
 
   @override
@@ -112,8 +122,9 @@ class _VideoCallPageState extends State<VideoCallPage> {
                 bgColor: Colors.red,
                 iconColor: Colors.white,
                 onTapped: () {
-                  Navigator.pop(context);
                   _cameraController.dispose();
+                  interstitialPusher.showInterstitialAd();
+                  Navigator.pop(context);
                 }),
           ),
         ],

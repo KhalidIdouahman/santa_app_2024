@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:santa_app_2024/ads_services/ad_mob_GDPR/gdpr_screen.dart';
 import 'package:santa_app_2024/ads_services/onesignal_ads/one_signal.dart';
 import 'package:santa_app_2024/pages/home_page.dart';
 
@@ -7,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:santa_app_2024/ads_services/iron_source_ads/iron_source.dart';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:santa_app_2024/ads_services/appsflyer/apps_flyer.dart';
 
 late List<CameraDescription> camerasList;
 
@@ -21,6 +23,8 @@ Future<void> main() async {
   initOneSignalNotifications();
   // initialize app open adMob ads
   MobileAds.instance.initialize();
+  // initialize appsflyer
+  initializeAppsFlyer();
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
@@ -40,7 +44,10 @@ class MyApp extends StatelessWidget {
       //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       //   useMaterial3: true,
       // ),
-      home: HomeScreen(camerasDesList: camerasList),
+      // home: HomeScreen(camerasDesList: camerasList),
+      
+      // i add this to show the gdpr dialog of the privacy in europ region.
+      home: InitializeGDPRScreen(targetWidget: HomeScreen(camerasDesList: camerasList)),
     );
   }
 }

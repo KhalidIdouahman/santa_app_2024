@@ -1,7 +1,6 @@
 import 'package:ironsource_mediation/ironsource_mediation.dart';
 
 class IronSourceBannerPusher with LevelPlayBannerListener {
-  
   void showBannerAd() async {
     try {
       await IronSource.loadBanner(
@@ -10,38 +9,39 @@ class IronSourceBannerPusher with LevelPlayBannerListener {
       );
       await IronSource.displayBanner();
     } catch (e) {
-      print("Error displaying banner: $e");
+      print("Error displaying my ironSource banner: $e");
     }
   }
 
   @override
   void onAdLoaded(IronSourceAdInfo adInfo) {
-    print("onAdLoaded: $adInfo");
+    print("onAdLoaded my ironSource : $adInfo");
   }
 
   @override
   void onAdLoadFailed(IronSourceError error) {
-    print("Banner - onAdLoadFailed Error:$error");
+    print(" my ironSource Banner - onAdLoadFailed Error:$error");
+    IronSource.destroyBanner();
     // showBannerAd();
   }
 
   @override
   void onAdClicked(IronSourceAdInfo adInfo) {
-    print("Banner - onAdClicked: $adInfo");
+    print(" my ironSource Banner - onAdClicked: $adInfo");
   }
 
   @override
   void onAdScreenDismissed(IronSourceAdInfo adInfo) {
-    print("Banner - onAdScreenDismissed: $adInfo");
+    print(" my ironSource Banner - onAdScreenDismissed: $adInfo");
   }
 
   @override
   void onAdScreenPresented(IronSourceAdInfo adInfo) {
-    print("Banner - onAdScreenPresented: $adInfo");
+    print(" my ironSource Banner - onAdScreenPresented: $adInfo");
   }
 
   @override
   void onAdLeftApplication(IronSourceAdInfo adInfo) {
-    print("Banner - onAdLeftApplication: $adInfo");
+    print(" my ironSource Banner - onAdLeftApplication: $adInfo");
   }
 }

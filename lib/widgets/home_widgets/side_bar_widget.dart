@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:santa_app_2024/constants/text.dart';
+import 'package:santa_app_2024/functionalities/share.dart';
+import 'package:santa_app_2024/constants/app_id_and_urls.dart';
 // import 'package:santa_app_2024/pages/home_page.dart';
 
 class NavBar extends StatelessWidget {
@@ -14,22 +16,29 @@ class NavBar extends StatelessWidget {
         children: [
           Container(
             color: Colors.red[400],
-            padding: EdgeInsets.only(top: 24 + MediaQuery.of(context).padding.top , bottom: 24 ),
+            padding: EdgeInsets.only(
+                top: 24 + MediaQuery.of(context).padding.top, bottom: 24),
             child: Column(
               children: [
                 CircleAvatar(
                   radius: 52,
-                child: ClipOval(
-                  child: Image.asset(
-                    'assets/images/santa_calling.jpg',
-                    height: 120,
-                    width: 120,
-                    fit: BoxFit.cover,
+                  child: ClipOval(
+                    child: Image.asset(
+                      'assets/images/santa_calling.jpg',
+                      height: 120,
+                      width: 120,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              const Text("Santa Claus" , style: TextStyle(fontSize: 18 , fontWeight: FontWeight.bold , color: Colors.white),)
+                const SizedBox(height: 20),
+                const Text(
+                  "Santa Claus",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                )
               ],
             ),
           ),
@@ -46,7 +55,6 @@ class NavBar extends StatelessWidget {
           ),
         ],
       ),
-
     );
   }
 
@@ -67,7 +75,7 @@ class NavBar extends StatelessWidget {
         ),
         subtitle: Text(
           sideBarData[index].subtitle,
-          style: const TextStyle(color: color , fontSize: 12),
+          style: const TextStyle(color: color, fontSize: 12),
         ),
         onTap: onClick,
       ),
@@ -89,10 +97,24 @@ class NavBar extends StatelessWidget {
         // print("sidebar item $index clicked.");
         break;
       case 2:
-        // Navigator.pushReplacement(myContext, MaterialPageRoute(builder: (myContext) => const HomePage()));
-        // print("sidebar item $index clicked.");
+        reviewInTheStore("jp.konami.pesam", "");
         break;
-      case -1:
+      case 3:
+        shareData(
+          message:
+              "Take a look to this beautiful app , I am sure you will like it. 😍❤",
+          url: appUrl,
+        );
+        break;
+      case 4:
+        goToUrl(urlWebsite);
+        break;
+      case 5:
+        break;
+      case 6:
+        goToUrl(privacyPolicyLink);
+        break;
+      case 7:
         // this to exit the app
         SystemNavigator.pop();
         break;

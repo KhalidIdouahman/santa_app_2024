@@ -17,11 +17,14 @@ class OtherCharactersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
         title: const Text(
           "Contacts",
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
+            // it is neccessr to do this line , or the design wouldn't show.
             color: Colors.white,
           ),
         ),

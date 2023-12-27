@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:santa_app_2024/constants/text.dart';
 import 'package:santa_app_2024/models/chat_models/text_chat.dart';
 import 'package:santa_app_2024/models/chat_models/user_chat.dart';
+import 'package:santa_app_2024/pages/calling_page/making_call_page.dart';
 import 'package:santa_app_2024/widgets/chat_widgets/chat_appbar.dart';
 import 'package:santa_app_2024/widgets/chat_widgets/chat_msg_bubble.dart';
 import 'package:santa_app_2024/widgets/chat_widgets/chat_text_holder.dart';
@@ -47,7 +48,14 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     // print(chatItemsList);
     return Scaffold(
-      appBar: buildAppBar(widget.user, isTyping),
+      appBar: buildAppBar(
+        widget.user,
+        isTyping,
+        () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => MakeCallPage(user: widget.user)));
+        },
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -71,7 +79,7 @@ class _ChatPageState extends State<ChatPage> {
             // this creates the list of chat options at the bottom .
             Container(
               height: 55,
-              margin: const EdgeInsets.only(bottom: 20),
+              margin: const EdgeInsets.only(bottom: 40),
               // color: Colors.grey,
               child: ListView.builder(
                 itemCount: chatItemsList.length,
@@ -104,7 +112,7 @@ class _ChatPageState extends State<ChatPage> {
 // this function's role is to send the response to the user when he send a question .
 // i was trying to add the animation when the response is about to show , but i face some issues,
 // until i fix them , but i added the sound when the response is showing , and the effect of the appbar
-// to show online or typing... 
+// to show online or typing...
   Future<void> sendResponse(ChatText message) async {
     // setState(() {
     //   isResponseLoaded = false;

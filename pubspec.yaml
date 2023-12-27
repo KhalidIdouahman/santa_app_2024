@@ -76,6 +76,8 @@ dependencies:
   google_mobile_ads: ^4.0.0
   # to show the animation in chat page of typing
   lottie: ^2.7.0
+  # to accepte the privacy policie of the europ, and track the app
+  appsflyer_sdk: ^6.12.2
 
   # to do the header animation , but i didn't work with it .
   # sliver_tools: ^0.2.12

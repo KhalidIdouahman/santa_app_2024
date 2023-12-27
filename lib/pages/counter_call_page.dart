@@ -9,6 +9,7 @@ import 'package:ironsource_mediation/ironsource_mediation.dart';
 import 'package:santa_app_2024/ads_services/iron_source_ads/banner_pusher.dart';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:santa_app_2024/ads_services/ad_mob_ads/native_ads/home_native_ad.dart';
 import 'dart:io';
 
 class CounterCallPage extends StatefulWidget {
@@ -39,8 +40,8 @@ class _CounterCallPageState extends State<CounterCallPage> {
     WidgetsFlutterBinding.ensureInitialized();
     _notificationHandler.initNotifications();
 
-    // initialize the banner ads
-    bannerAd.showBannerAd();
+  // to destroy the ironsource banner of the home page, to let the space for the nataive ads.
+    IronSource.destroyBanner();
     //  for admob ads
     dispalyAdBanner(bannerAdMob);
     // setState(() {
@@ -84,7 +85,8 @@ class _CounterCallPageState extends State<CounterCallPage> {
 
   @override
   void dispose() {
-    IronSource.destroyBanner();
+    // initialize the banner ads to be showing in all pages.
+    bannerAd.showBannerAd();
     super.dispose();
   }
 
@@ -146,50 +148,56 @@ class _CounterCallPageState extends State<CounterCallPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
         title: const Text(
           "Schedule Call",
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            // color: Colors.white,
           ),
         ),
         centerTitle: true,
       ),
-      body: Stack(children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 20),
-          // this listview creates the items of the counter page .
-          child: ListView.builder(
-            itemCount: scheduleCalls.length,
-            itemBuilder: (context, index) {
-              return buildListCounterCallItem(
-                scheduleCall: scheduleCalls[index],
-                storedTimes: storeCounterDownTimers,
-                onItemClicked: () {
-                  timerHandler(index);
-                },
-              );
-            },
+      body: Column(
+        children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            // this listview creates the items of the counter page .
+            child: ListView.builder(
+              itemCount: scheduleCalls.length,
+              itemBuilder: (context, index) {
+                return buildListCounterCallItem(
+                  scheduleCall: scheduleCalls[index],
+                  storedTimes: storeCounterDownTimers,
+                  onItemClicked: () {
+                    timerHandler(index);
+                  },
+                );
+              },
+            ),
           ),
         ),
-
+// i was trying to show the admob banner in this page, but the master changes his mind.
             // adBannerObj.buildBannerAdWidget(bannerAdMob),
-            bannerAdMob != null
-                ? Container(
-                  color: Colors.red,
-                  child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: SafeArea(
-                        child: SizedBox(
-                          width: bannerAdMob!.size.width.toDouble(),
-                          height: bannerAdMob!.size.height.toDouble(),
-                          child: AdWidget(ad: bannerAdMob!),
-                        ),
-                      ),
-                    ),
-                )
-                : Container(),
+            // bannerAdMob != null
+            //     ? Container(
+            //       color: Colors.red,
+            //       child: Align(
+            //           alignment: Alignment.bottomCenter,
+            //           child: SafeArea(
+            //             child: SizedBox(
+            //               width: bannerAdMob!.size.width.toDouble(),
+            //               height: bannerAdMob!.size.height.toDouble(),
+            //               child: AdWidget(ad: bannerAdMob!),
+            //             ),
+            //           ),
+            //         ),
+            //     )
+            //     : Container(),
+            const NativeAdWidget(maxWidth: 330, maxHeight: 360, adSize: TemplateType.medium)
       ],),
     );
   }

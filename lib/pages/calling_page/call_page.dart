@@ -5,6 +5,8 @@ import 'package:santa_app_2024/widgets/calling_widgets/call_functs_btn.dart';
 import 'package:santa_app_2024/widgets/calling_widgets/calling_btn.dart';
 
 import 'package:santa_app_2024/functionalities/audio_playing.dart';
+import 'package:ironsource_mediation/ironsource_mediation.dart';
+import 'package:santa_app_2024/ads_services/iron_source_ads/interstitial_pusher.dart';
 
 class CallPage extends StatefulWidget {
   final UserChat user;
@@ -18,9 +20,20 @@ class _CallPageState extends State<CallPage> {
   final callSound = SoundPlayer();
   final callSoundPath = "sounds/santa_reading_christmas_story.mp3";
 
+  // to show an interstitial after ending the video call.
+  final IronSourceInterstitialPusher interstitialAd =
+      IronSourceInterstitialPusher(
+    loadNextInterstitial: () {
+      IronSource.loadInterstitial();
+    },
+  );
+
   @override
   void initState() {
     callSound.playSound(callSoundPath);
+    // load interstitial ot be ready to show
+    IronSource.loadInterstitial();
+
     super.initState();
   }
 
@@ -101,6 +114,7 @@ class _CallPageState extends State<CallPage> {
                       iconColor: Colors.white,
                       onTapped: () {
                         callSound.stopSound();
+                        interstitialAd.showInterstitialAd();
                         Navigator.pop(context);
                       }),
                 ],

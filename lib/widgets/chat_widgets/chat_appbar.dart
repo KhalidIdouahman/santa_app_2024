@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:santa_app_2024/models/chat_models/user_chat.dart';
 
 // i change the colors of the app bar, and the state of santa when chating , is typing or not.
+typedef CallbackAction = void Function();
 
-AppBar buildAppBar(UserChat user , bool isTyping) {
+AppBar buildAppBar(UserChat user , bool isTyping , CallbackAction callSanta) {
   return AppBar(
     elevation: 0,
     foregroundColor: Colors.white,
@@ -48,10 +49,9 @@ AppBar buildAppBar(UserChat user , bool isTyping) {
     actions: [
       Padding(
         padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+        // to handle the click of the button in the chat page.
         child: GestureDetector(
-          onTap: () {
-            print('calling santa');
-          },
+          onTap: callSanta,
           child: const Icon(
             Icons.call,
             // color: Colors.black,
