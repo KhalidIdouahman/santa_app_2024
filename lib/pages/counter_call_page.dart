@@ -10,7 +10,7 @@ import 'package:santa_app_2024/ads_services/iron_source_ads/banner_pusher.dart';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:santa_app_2024/ads_services/ad_mob_ads/native_ads/home_native_ad.dart';
-import 'dart:io';
+// import 'dart:io';
 
 class CounterCallPage extends StatefulWidget {
   const CounterCallPage({super.key});
@@ -43,45 +43,46 @@ class _CounterCallPageState extends State<CounterCallPage> {
   // to destroy the ironsource banner of the home page, to let the space for the nataive ads.
     IronSource.destroyBanner();
     //  for admob ads
-    dispalyAdBanner(bannerAdMob);
+    // dispalyAdBanner(bannerAdMob);
     // setState(() {
     //   adBannerObj.dispalyAdBanner(bannerAdMob, isBannerAdMobLoaded);
     // });
   }
 
-  void dispalyAdBanner(BannerAd? adBanenr) {
-    final adUnitId = Platform.isAndroid
-        ? 'ca-app-pub-3940256099942544/6300978111'
-        : 'ca-app-pub-3940256099942544/2934735716';
+  // it seems that this function shows an admob banner and i don't work with it anymore.
+  // void dispalyAdBanner(BannerAd? adBanenr) {
+  //   final adUnitId = Platform.isAndroid
+  //       ? 'ca-app-pub-3940256099942544/6300978111'
+  //       : 'ca-app-pub-3940256099942544/2934735716';
 
-    adBanenr = BannerAd(
-      adUnitId: adUnitId,
-      request: const AdRequest(),
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        // Called when an ad is successfully received.
-        onAdLoaded: (ad) {
-          print('$ad this ad has been loaded successfuly , thanks.');
-          setState(() {
-            isBannerAdMobLoaded = true;
-          });
-        },
-        // Called when an ad request failed.
-        onAdFailedToLoad: (ad, err) {
-          print('BannerAd failed to load: $err');
-          isBannerAdMobLoaded = false;
-          // Dispose the ad here to free resources.
-          ad.dispose();
-        },
-        // Called when an ad opens an overlay that covers the screen.
-        onAdOpened: (Ad ad) {},
-        // Called when an ad removes an overlay that covers the screen.
-        onAdClosed: (Ad ad) {},
-        // Called when an impression occurs on the ad.
-        onAdImpression: (Ad ad) {},
-      ),
-    )..load();
-  }
+  //   adBanenr = BannerAd(
+  //     adUnitId: adUnitId,
+  //     request: const AdRequest(),
+  //     size: AdSize.banner,
+  //     listener: BannerAdListener(
+  //       // Called when an ad is successfully received.
+  //       onAdLoaded: (ad) {
+  //         print('$ad this ad has been loaded successfuly , thanks.');
+  //         setState(() {
+  //           isBannerAdMobLoaded = true;
+  //         });
+  //       },
+  //       // Called when an ad request failed.
+  //       onAdFailedToLoad: (ad, err) {
+  //         print('BannerAd failed to load: $err');
+  //         isBannerAdMobLoaded = false;
+  //         // Dispose the ad here to free resources.
+  //         ad.dispose();
+  //       },
+  //       // Called when an ad opens an overlay that covers the screen.
+  //       onAdOpened: (Ad ad) {},
+  //       // Called when an ad removes an overlay that covers the screen.
+  //       onAdClosed: (Ad ad) {},
+  //       // Called when an impression occurs on the ad.
+  //       onAdImpression: (Ad ad) {},
+  //     ),
+  //   )..load();
+  // }
 
   @override
   void dispose() {
