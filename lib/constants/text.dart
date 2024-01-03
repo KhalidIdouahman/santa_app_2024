@@ -140,6 +140,7 @@ final List<ChatText> chatTextData = [
           "Yes , I love it . And you ? If you love to you should give it a 5 stars , and a great comment , and share it with your friends and family , Goodbye"),
 ];
 
+// the only data that is used from this list is the santa , others has been fetched from firebase.
 final List<UserChat> usersList = [
   const UserChat(
     userName: "Santa",

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1054553494737",
+    "project_id": "santa-app-2024",
+    "storage_bucket": "santa-app-2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054553494737:android:5b6dff0daf4a55edcfa1f0",
+        "android_client_info": {
+          "package_name": "com.example.santa_app_2024"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgtJL9sCGeaSSV3qRr3bM8d5c0f7eW7yc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

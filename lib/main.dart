@@ -9,6 +9,8 @@ import 'package:santa_app_2024/ads_services/iron_source_ads/iron_source.dart';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:santa_app_2024/ads_services/appsflyer/apps_flyer.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:santa_app_2024/firebase_options.dart';
 
 late List<CameraDescription> camerasList;
 
@@ -25,6 +27,8 @@ Future<void> main() async {
   MobileAds.instance.initialize();
   // initialize appsflyer
   initializeAppsFlyer();
+  // intialize firebase
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
@@ -45,9 +49,10 @@ class MyApp extends StatelessWidget {
       //   useMaterial3: true,
       // ),
       // home: HomeScreen(camerasDesList: camerasList),
-      
+
       // i add this to show the gdpr dialog of the privacy in europ region.
-      home: InitializeGDPRScreen(targetWidget: HomeScreen(camerasDesList: camerasList)),
+      home: InitializeGDPRScreen(
+          targetWidget: HomeScreen(camerasDesList: camerasList)),
     );
   }
 }

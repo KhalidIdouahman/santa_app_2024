@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:santa_app_2024/models/chat_models/user_chat.dart';
 import 'package:santa_app_2024/widgets/calling_widgets/call_functs_btn.dart';
@@ -8,9 +9,14 @@ import 'package:santa_app_2024/functionalities/audio_playing.dart';
 import 'package:ironsource_mediation/ironsource_mediation.dart';
 import 'package:santa_app_2024/ads_services/iron_source_ads/interstitial_pusher.dart';
 
+import 'package:santa_app_2024/models/firestore_model/firestore_model.dart';
+import 'package:santa_app_2024/widgets/calling_widgets/call_bg_with_blur.dart';
+
 class CallPage extends StatefulWidget {
   final UserChat user;
-  const CallPage({super.key, required this.user});
+  // i pass the character obj and let the user for the default case of santa.
+  final Character? character;
+  const CallPage({super.key, required this.user, this.character});
 
   @override
   State<CallPage> createState() => _CallPageState();
@@ -39,34 +45,30 @@ class _CallPageState extends State<CallPage> {
 
   @override
   Widget build(BuildContext context) {
+    final Character? character = widget.character;
+    final bool isCharacterNull = character == null;
     return Scaffold(
       body: Stack(
-        fit: StackFit.expand,
         children: [
-          Image.asset(
-            widget.user.imgUrl,
-            fit: BoxFit.cover,
-          ),
-          // Apply blur effect using BackdropFilter
-          BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-            child: Container(
-              color: Colors.black.withOpacity(0.4),
-            ),
-          ),
-          // Your content on top of the blurred image
+          buildBackgroundImgWithBlur(character),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Column(
                 children: [
+                  isCharacterNull ?
                   CircleAvatar(
                     backgroundImage: AssetImage(widget.user.imgUrl),
+                    radius: 50,
+                  ) :
+                  CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(character.characterImg),
                     radius: 50,
                   ),
                   const SizedBox(height: 15),
                   Text(
-                    widget.user.userName,
+                    isCharacterNull ?
+                    widget.user.userName : character.characterName,
                     style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -74,9 +76,10 @@ class _CallPageState extends State<CallPage> {
                   ),
                   const SizedBox(height: 15),
                   Text(
-                    widget.user.phoneNum!,
+                    isCharacterNull ? 
+                    widget.user.phoneNum! : character.characterNum,
                     style: const TextStyle(color: Colors.white, fontSize: 16),
-                  )
+                  ),
                 ],
               ),
               Column(

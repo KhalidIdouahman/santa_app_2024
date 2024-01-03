@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:santa_app_2024/models/chat_models/user_chat.dart';
 import 'package:santa_app_2024/pages/calling_page/call_page.dart';
@@ -6,9 +5,16 @@ import 'package:santa_app_2024/widgets/calling_widgets/calling_btn.dart';
 
 import 'package:santa_app_2024/functionalities/audio_playing.dart';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:santa_app_2024/models/firestore_model/firestore_model.dart';
+import 'package:santa_app_2024/widgets/calling_widgets/call_bg_with_blur.dart';
+
 class MakeCallPage extends StatefulWidget {
   final UserChat user;
-  const MakeCallPage({super.key, required this.user});
+  // i pass the character obj and let the user for the default case of santa.
+  // if the character is passed i show his data , else the data of santa.
+  final Character? character;
+  const MakeCallPage({super.key, required this.user, this.character});
 
   @override
   State<MakeCallPage> createState() => _MakeCallPageState();
@@ -33,36 +39,34 @@ class _MakeCallPageState extends State<MakeCallPage> {
 
   @override
   Widget build(BuildContext context) {
+    final character = widget.character;
+    final bool isCharacterNull = widget.character == null;
+
     return Scaffold(
       body: Stack(
-        // to let the image expand in the whole screen
-        fit: StackFit.expand,
         children: [
-          Image.asset(
-            widget.user.imgUrl,
-            fit: BoxFit.cover,
-          ),
-          // Apply blur effect using BackdropFilter
-          BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-            child: Container(
-              color: Colors.black.withOpacity(0.4),
-            ),
-          ),
-          // the content on top of the blurred image
+          buildBackgroundImgWithBlur(character),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               // this column shows the image with the name and the phoneNum.
               Column(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage(widget.user.imgUrl),
-                    radius: 50,
-                  ),
+                  isCharacterNull
+                      ? CircleAvatar(
+                          backgroundImage: AssetImage(widget.user.imgUrl),
+                          radius: 50,
+                        )
+                      : CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(
+                              character!.characterImg),
+                          radius: 50,
+                        ),
                   const SizedBox(height: 15),
                   Text(
-                    widget.user.userName,
+                    isCharacterNull
+                        ? widget.user.userName
+                        : character!.characterName,
                     style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -70,7 +74,9 @@ class _MakeCallPageState extends State<MakeCallPage> {
                   ),
                   const SizedBox(height: 15),
                   Text(
-                    widget.user.phoneNum!,
+                    isCharacterNull
+                        ? widget.user.phoneNum!
+                        : character!.characterNum,
                     style: const TextStyle(color: Colors.white, fontSize: 16),
                   )
                 ],
@@ -109,7 +115,10 @@ class _MakeCallPageState extends State<MakeCallPage> {
                     onTapped: () {
                       makingSound.stopSound();
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => CallPage(user: widget.user)));
+                          builder: (context) => CallPage(
+                                user: widget.user,
+                                character: character,
+                              )));
                     },
                   ),
                 ],

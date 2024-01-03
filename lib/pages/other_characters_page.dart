@@ -9,6 +9,10 @@ import 'package:ironsource_mediation/ironsource_mediation.dart';
 import 'package:santa_app_2024/ads_services/ad_mob_ads/native_ads/home_native_ad.dart';
 import 'package:santa_app_2024/ads_services/iron_source_ads/banner_pusher.dart';
 
+import 'package:santa_app_2024/widgets/other_characters_widget/other_characters_item.dart';
+import 'package:santa_app_2024/models/firestore_model/firestore_model.dart';
+import 'package:santa_app_2024/functionalities/firebase_functionalities.dart';
+
 // i need to search on this to understand it will .
 typedef CallbackAction = void Function();
 
@@ -20,8 +24,11 @@ class OtherCharactersPage extends StatefulWidget {
 }
 
 class _OtherCharactersPageState extends State<OtherCharactersPage> {
-  final serverUrl = "put url server here";
+  // final serverUrl = "put url server here";
   final IronSourceBannerPusher bannerAd = IronSourceBannerPusher();
+
+  // create an obj of the class where i handle the interaction with firestore to get the data.
+  final firestoreData = MyFireStoreFunctionalities();
 
   @override
   void initState() {
@@ -54,104 +61,58 @@ class _OtherCharactersPageState extends State<OtherCharactersPage> {
         ),
         centerTitle: true,
       ),
-      body:
-          // FutureBuilder(
-          //     future: getCharactersList(urlApi: serverUrl),
-          //     builder: (context, snapshot) {
-          //       if (snapshot.connectionState == ConnectionState.waiting) {
-          //         return const Center(child: CircularProgressIndicator.adaptive());
-          //       }
+      body: FutureBuilder(
+          future: firestoreData.fetchAllCharacters(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator.adaptive());
+            }
 
-          //       if (snapshot.hasError) {
-          //         return Center(
-          //             child: Text(
-          //           snapshot.error.toString(),
-          //           style:
-          //               const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          //         ));
-          //       }
+            if (snapshot.hasError) {
+              return Center(
+                  child: Text(
+                snapshot.error.toString(),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ));
+            }
 
-          //       final List<UserChat> charactersList = snapshot.data!;
+            final List<Character> charactersList = snapshot.data!;
 
-          //       return
-          Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: ListView.builder(
-                itemCount: usersList.length,
-                itemBuilder: (context, index) {
-                  UserChat choosedUser = usersList[index];
-                  return buildListItem(
-                    user: choosedUser,
-                    onItemClicked: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MakeCallPage(user: choosedUser),
-                          // this should be uncomented when the server is working.
-                          // builder: (context) => MakeCallPage(user: charactersList[index]),
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
-            ),
-          ),
-          const NativeAdWidget(
-              maxWidth: 330, maxHeight: 360, adSize: TemplateType.medium),
-        ],
-      ),
-      // }),
-    );
-  }
-}
-
-Widget buildListItem(
-    {required UserChat user, required CallbackAction onItemClicked}) {
-  return Padding(
-    padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-    child: Card(
-      child: InkWell(
-        onTap: onItemClicked,
-        child: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CircleAvatar(
-                backgroundImage: AssetImage(user.imgUrl),
-              ),
-              Column(
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    user.userName,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+            return Column(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: ListView.builder(
+                      // itemCount: usersList.length,
+                      itemCount: charactersList.length,
+                      itemBuilder: (context, index) {
+                        // i let this user to pass the data of santa to makeCall page.
+                        UserChat choosedUser = usersList[0];
+                        Character choosedCharacter = charactersList[index];
+                        return buildCharacterListItem(
+                          character: choosedCharacter,
+                          onItemClicked: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    MakeCallPage(user: choosedUser , character: choosedCharacter),
+                              ),
+                            );
+                          },
+                        );
+                      },
                     ),
                   ),
-                  const SizedBox(height: 6),
-                  Text(
-                    user.phoneNum!,
-                    style: const TextStyle(fontSize: 13, color: Colors.grey),
-                  ),
-                ],
-              ),
-              // const SizedBox(width: 0.1),
-              const Icon(
-                Icons.call,
-                color: Colors.black,
-                size: 22,
-              )
-            ],
-          ),
-        ),
-      ),
-    ),
-  );
+                ),
+                const NativeAdWidget(
+                    maxWidth: 330, maxHeight: 360, adSize: TemplateType.medium),
+              ],
+              // ),
+            );
+          }),
+    );
+  }
 }

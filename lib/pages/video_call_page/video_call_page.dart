@@ -19,6 +19,9 @@ class _VideoCallPageState extends State<VideoCallPage> {
   late VideoPlayerController _controller;
   // the videos from youtube doesn't supported from this package .
   // final String videoUrl = "https://www.youtube.com/watch?v=WVbWdeloQ4s";
+  // this is the video url from the firebase storage.
+  final String videoUrl =
+      "https://firebasestorage.googleapis.com/v0/b/santa-app-2024.appspot.com/o/character_videos%2FTalk%20to%20Santa%20Claus.mp4?alt=media&token=d0daaab5-4c22-432a-b23f-e81576516395";
 
   late CameraController _cameraController;
 
@@ -53,8 +56,9 @@ class _VideoCallPageState extends State<VideoCallPage> {
   void initState() {
     super.initState();
     // initialize the video player.
-    _controller = VideoPlayerController.networkUrl(Uri.parse(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'))
+    // _controller = VideoPlayerController.networkUrl(Uri.parse(
+    //     'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'))
+    _controller = VideoPlayerController.networkUrl(Uri.parse(videoUrl))
       ..initialize().then((value) {
         setState(() {
           _controller.play();

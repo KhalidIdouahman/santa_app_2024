@@ -78,6 +78,10 @@ dependencies:
   lottie: ^2.7.0
   # to accepte the privacy policie of the europ, and track the app
   appsflyer_sdk: ^6.12.2
+  # to access to firebase services
+  firebase_core: ^2.24.2
+  # to acceess the cloud firestore
+  cloud_firestore: ^4.13.6
 
   # to do the header animation , but i didn't work with it .
   # sliver_tools: ^0.2.12

@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Builder(
         builder: (context) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.fromLTRB(20 , 0 , 20, 80),
             // this customScrollView is the widget who let the header animates depanding on scrolling.
             child: CustomScrollView(
               slivers: [
