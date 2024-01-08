@@ -41,10 +41,17 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final IronSourceBannerPusher _bannerPusher = IronSourceBannerPusher();
 
+  // late AppLifecycleReactor _appLifecycleReactor;
+
   @override
   void initState() {
     super.initState();
     _bannerPusher.showBannerAd();
+    // AppOpenAdManager appOpenAd = AppOpenAdManager()..showAdIfAvailable();
+    // AppOpenAdManager appOpenAdManager = AppOpenAdManager()..loadAd();
+    // _appLifecycleReactor = AppLifecycleReactor(
+    //   appOpenAdManager: appOpenAdManager,
+    // );
   }
 
   @override
@@ -57,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Builder(
         builder: (context) {
           return Padding(
-            padding: const EdgeInsets.fromLTRB(20 , 0 , 20, 80),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 80),
             // this customScrollView is the widget who let the header animates depanding on scrolling.
             child: CustomScrollView(
               slivers: [
