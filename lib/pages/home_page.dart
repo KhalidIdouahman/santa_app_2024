@@ -47,6 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _bannerPusher.showBannerAd();
+    // i add this line to listen to the 
+    IronSource.setLevelPlayBannerListener(_bannerPusher);
+    // this code is to test the appOpen ad but it doesn't work 
     // AppOpenAdManager appOpenAd = AppOpenAdManager()..showAdIfAvailable();
     // AppOpenAdManager appOpenAdManager = AppOpenAdManager()..loadAd();
     // _appLifecycleReactor = AppLifecycleReactor(

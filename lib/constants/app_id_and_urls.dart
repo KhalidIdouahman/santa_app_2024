@@ -11,11 +11,12 @@ const String serverUrl =
 
 // this commented key is working
 // const String ANDROID_APP_KEY = "1804d5bed";
-const String ANDROID_APP_KEY = "1b0ef081d";
+// const String ANDROID_APP_KEY = "1b0ef081d";
 const String IOS_APP_KEY = "1cec653e5";
 
-// this is mine, and not working
-// const String ANDROID_APP_KEY = "1cec653e5";
+// this is mine, and not working / it's know working because i turn it to test mode 
+// by switching from yellow to blue , in the dashboard .
+const String ANDROID_APP_KEY = "1cec653e5";
 
 // native ad id
 
